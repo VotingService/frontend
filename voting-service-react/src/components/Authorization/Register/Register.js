@@ -1,7 +1,6 @@
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { FaLock } from "react-icons/fa";
 import { SiGoogledocs } from "react-icons/si";
-import { MdDateRange } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import "../Authorize.css"
 
