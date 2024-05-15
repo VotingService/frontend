@@ -1,6 +1,6 @@
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { FaLock } from "react-icons/fa";
-import "./Login.css"
+import "../Authorize.css"
 
 function Login() {
     return (
@@ -15,7 +15,6 @@ function Login() {
                     <input type="password" placeholder='Пароль' required/>
                     <FaLock className="icon"/>
                 </div>
-
                 <div className="remember-forgot">
                     <label><input type="checkbox"/>Запам'ятати мене</label>
                     <a href="#">Забули пароль?</a>
@@ -24,7 +23,7 @@ function Login() {
                 <button type="submit">Увійти</button>
 
                 <div className="register-link">
-                    <p>Вперше тут? <a href="#">Зареєструйтесь</a></p>
+                    <p>Вперше тут? <a href="/register">Зареєструйтесь</a></p>
                 </div>
             </form>
         </div>
