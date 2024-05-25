@@ -1,0 +1,87 @@
+.election-page{
+  color: rgb(0, 11, 91);
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.election-winner-block{
+  margin: 30px;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.election-winner-block img{
+  width: 200px;
+  /* height: 400px; */
+}
+
+.election-winner-block__info{
+  width: 500px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.show-hide-statistics-button{
+  width: 300px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: rgb(0, 78, 147);
+  color: white;
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 2em;
+  transition: background-color 0.3s ease;
+}
+
+.show-hide-statistics-button:hover{
+  background-color: rgb(0, 11, 91);
+  transition: background-color 0.3s ease;
+}
+
+.candidate-statistics-item{
+  margin-bottom: 20px;
+}
+
+.candidate-statistics-item__info{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.candidate-statistics-item__info h5{
+  font-size: 16px;
+}
+
+.candidate-statistics-item__info a:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.candidate-statistics-item__bar{
+  border-radius: 1em;
+  border-color: rgb(0, 11, 91);
+  border-width: 1px;
+  border: solid;
+  background-color: white;
+  height: 30px;
+  display: flex;
+}
+
+.candidate-statistics-item__bar__filled{
+  background-color: rgb(0, 78, 147);
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+  height: 100%;
+}
+
+.candidate-statistics-item__bar__percentage{
+  padding-left: 20px;
+}
