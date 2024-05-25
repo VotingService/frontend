@@ -1,6 +1,10 @@
 .about-page{
   color: rgb(0, 11, 91);
   font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 150px;
 }
 
 .about-info{
