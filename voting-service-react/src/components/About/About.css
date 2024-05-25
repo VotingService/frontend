@@ -1,0 +1,30 @@
+.about-page{
+  color: rgb(0, 11, 91);
+  font-size: 1.1em;
+}
+
+.about-info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1000px;
+}
+
+.about-info img{
+  width: 320px;
+}
+
+.about-info p{
+  max-width: 500px;
+  font-weight: 500;
+}
+
+.about-info__rules{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.about-info__rules p{
+  padding-bottom: 20px;
+}
