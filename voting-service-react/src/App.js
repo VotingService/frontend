@@ -7,6 +7,7 @@ import {
 import Login from './components/Authorization/Login/Login'
 import Register from './components/Authorization/Register/Register'
 import Header from './components/Header/Header';
+import Home from './components/Home/Home/Home';
 import Election from './components/Election/Election';
 import About from './components/About/About'
 
@@ -17,6 +18,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
+                <Route path="/home" element={<Home/>}/>
                 <Route path="/election" element={<Election/>}/>
                 <Route path="about" element={<About/>}/>
             </Routes>
