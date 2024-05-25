@@ -64,7 +64,7 @@ function Election(){
   rendered_statistics = election.candidates.map(candidate => (
     <div className="candidate-statistics-item">
       <div className="candidate-statistics-item__info">
-        <p>{candidate.name} {candidate["by-father"]} {candidate.surname}</p>
+        <h5>{candidate.name} {candidate["by-father"]} {candidate.surname}</h5>
         <a>Про кандидата</a>
       </div>
       <div style={{width: electionBarWidth}} className="candidate-statistics-item__bar">
