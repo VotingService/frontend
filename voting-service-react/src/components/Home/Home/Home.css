@@ -1,0 +1,16 @@
+.available-blocks {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 70px;
+    flex-wrap: wrap;
+}
+
+.Home h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.Home {
+
+}
