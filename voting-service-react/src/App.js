@@ -14,6 +14,7 @@ import Account from './components/Account/Account';
 import History from "./components/History/History";
 import Candidate from "./components/Candidate/Candidate";
 import SettingElectionProps from './components/CreateNewElection/SettingElectionProps/SettingElectionProps';
+import HomeAdmin from "./components/HomeAdmin/HomeAdmin";
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/history" element={<History/>}/>
                 <Route path="/candidate" element={<Candidate/>}/>
                 <Route path="/set-elect-props" element={<SettingElectionProps/>}/>
+                <Route path="/home-admin" element={<HomeAdmin/>}/>
             </Routes>
         </Router>
     );
