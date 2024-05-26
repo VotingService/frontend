@@ -35,6 +35,7 @@
     font-weight: 700;
     margin-top: 30px;
     align-items: center;
+    color: black;
 }
 
 .block>button:hover {
