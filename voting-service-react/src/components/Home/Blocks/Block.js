@@ -1,6 +1,6 @@
 import "./blocks.css"
 
-export default function Blocks(props){
+export default function Block(props){
     return(
         <div className="block">
             <div className="block-name">{props.name}</div>

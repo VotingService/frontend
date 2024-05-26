@@ -14,6 +14,7 @@ import Account from './components/Account/Account';
 import History from "./components/History/History";
 import Candidate from "./components/Candidate/Candidate";
 import HomeAdmin from "./components/HomeAdmin/HomeAdmin";
+import MyElections from "./components/MyElections/MyElections";
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/history" element={<History/>}/>
                 <Route path="/candidate" element={<Candidate/>}/>
                 <Route path="/home-admin" element={<HomeAdmin/>}/>
+                <Route path="/myelections-admin" element={<MyElections/>}/>
             </Routes>
         </Router>
     );
