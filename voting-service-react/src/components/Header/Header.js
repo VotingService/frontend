@@ -8,7 +8,7 @@ const Header = () => {
       <nav className="navbar">
         <ul className="nav-list">
           <li className="nav-item">
-            <a href="#" className="nav-link">
+            <a href="/account" className="nav-link">
               <MdAccountCircle style={{width: 22, height: 22}}/>
               Особистий кабінет
             </a>
