@@ -13,6 +13,7 @@ import About from './components/About/About'
 import Account from './components/Account/Account';
 import History from "./components/History/History";
 import Candidate from "./components/Candidate/Candidate";
+import SettingElectionProps from './components/CreateNewElection/SettingElectionProps/SettingElectionProps';
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/account" element={<Account/>}/>
                 <Route path="/history" element={<History/>}/>
                 <Route path="/candidate" element={<Candidate/>}/>
+                <Route path="/set-elect-props" element={<SettingElectionProps/>}/>
             </Routes>
         </Router>
     );
