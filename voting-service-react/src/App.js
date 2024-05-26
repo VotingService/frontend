@@ -10,6 +10,7 @@ import Header from './components/Header/Header';
 import Home from './components/Home/Home/Home';
 import Election from './components/Election/Election';
 import About from './components/About/About'
+import History from './components/History/History'
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/home" element={<Home/>}/>
                 <Route path="/election" element={<Election/>}/>
                 <Route path="about" element={<About/>}/>
+                <Route path="/history" element={<History/>}/>
             </Routes>
         </Router>
     );
