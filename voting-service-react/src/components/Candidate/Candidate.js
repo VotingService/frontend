@@ -4,7 +4,6 @@ export default function Candidate() {
     let candidate =
         {
             "name": "Володимир Зеленський Олександрович",
-            "party": "Блок Петра Порошенка",
             "image_uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Volodymyr_Zelensky_Official_portr" +
                 "ait.jpg/250px-Volodymyr_Zelensky_Official_portrait.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
@@ -18,10 +17,6 @@ export default function Candidate() {
                 <img alt="winner-icon" src={candidate.image_uri}/>
                 <div className="about-candidate">
                     <h2>{candidate.name}</h2>
-                    <div className="party">
-                        <h3>Приналежність до партії:</h3>
-                        {candidate.party ? <div>{candidate.party}</div> : <div>Кандидат не належить до партії</div>}
-                    </div>
                     <div className="candidate-description">{candidate.description}</div>
                 </div>
             </div>
