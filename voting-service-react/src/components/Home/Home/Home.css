@@ -12,6 +12,8 @@
 
 .no-available {
     padding-top: 30px;
+    display: flex;
+    justify-content: center;
 }
 
 .Home>h1 {
