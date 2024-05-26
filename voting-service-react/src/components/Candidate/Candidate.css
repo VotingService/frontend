@@ -1,0 +1,30 @@
+.Candidate {
+    padding-top: 100px;
+}
+
+.Candidate>h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.candidate-container {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 50px;
+}
+
+.about-candidate, .party {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.party {
+    padding-top: 20px;
+}
+
+.candidate-description {
+    padding-top: 40px;
+    max-width: 500px;
+}
