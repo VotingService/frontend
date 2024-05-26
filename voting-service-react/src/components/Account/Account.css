@@ -1,0 +1,57 @@
+.account-page{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.title {
+  color: rgb(0, 11, 91);
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.account-form, .password-form {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  padding: 20px;
+  text-align: left;
+  width: 400px;
+}
+
+label {
+  color: rgb(0, 78, 147);
+  display: block;
+  margin-bottom: 10px;
+}
+
+input {
+  border: 1px solid rgb(151, 207, 255);
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  padding: 8px;
+  width: 100%;
+  font-size: 15px;
+}
+
+button {
+  background-color: rgb(0, 78, 147);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
+  font-size: 15px;
+}
+
+button:hover {
+  background-color: rgb(0, 11, 91);
+  transition: background-color 0.3s ease;
+}
