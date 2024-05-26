@@ -1,0 +1,53 @@
+.admin-panel {
+  background-color: rgb(0, 11, 91);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 20px;
+  width: 350px;
+}
+
+.section {
+  border-bottom: 1px solid rgb(0, 78, 147);
+  padding: 15px 15px;
+  text-align: left;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  display: flex;
+  text-decoration: none;
+  color: white;
+}
+
+.section p{
+  padding-left: 10px;
+}
+
+.section:hover{
+  background-color: rgb(0, 78, 147);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.section__icon {
+  width: 20px;
+  margin-top: 4px;
+}
+
+.exit-button {
+  background-color: rgb(0, 78, 147);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  margin-top: auto;
+  padding: 10px 15px;
+}
+
+.exit-button:hover {
+  background-color: rgb(0, 11, 91);
+}
