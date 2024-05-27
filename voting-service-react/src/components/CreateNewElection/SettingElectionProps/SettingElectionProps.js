@@ -87,7 +87,7 @@ function SettingElectionProps(){
             </button>
             {showDropdown && (<div className="dropdown-menu">
               <div onClick={() => handleDropdownClick('Єдиний голос')}>Єдиний голос</div>
-              <div onClick={() => handleDropdownClick('Перегони')}>Перегони</div>
+              <div onClick={() => handleDropdownClick('Множинний голос')}>Множинний голос</div>
               <div onClick={() => handleDropdownClick('Оцінка')}>Оцінка</div>
             </div>)}
           </div>
