@@ -1,0 +1,26 @@
+.CandidateList h1 {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.CandidateList li {
+    display: flex;
+    padding-top: 50px;
+    justify-content: space-around;
+}
+
+.CandidateList ul {
+    list-style-type: disc;
+}
+
+.candidate-name {
+    font-size: 21px;
+    width: 500px;
+}
+
+.CandidateList hr {
+    width: 90%;
+    margin: 20px auto;
+    border: 2px solid black;
+}
