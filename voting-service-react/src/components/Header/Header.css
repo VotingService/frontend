@@ -53,14 +53,14 @@ header {
   width: 100%;
 }
 
-.exit-button{
+.nav-list .nav-item:last-child{
   background-color: white;
 }
 
-.exit-button:hover{
-  background-color: rgb(198, 198, 198);
+.nav-list .nav-item:last-child a{
+  color: rgb(0, 78, 147);
 }
 
-.exit-button a{
-  color: rgb(0, 78, 147);
+.nav-list .nav-item:last-child:hover{
+  background-color: rgb(198, 198, 198);
 }
