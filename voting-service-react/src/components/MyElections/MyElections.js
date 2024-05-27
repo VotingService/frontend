@@ -8,11 +8,8 @@ export default function MyElections(){
     const [searchValue, setSearchValue] = useState({searchValue: ''});
     let myElections = [
         {name: 'Вибори президента України', buttonType: 'history', endDate: '01/01/2022'},
-        {name: 'фсторія голосування2', buttonType: 'history', endDate: '02/02/2023'},
-        {name: 'асторія голосування2', buttonType: 'history', endDate: '02/02/2023'},
         {name: 'Історія голосування2', buttonType: 'history', endDate: '02/02/2023'},
         {name: 'Історія голосування2', buttonType: 'history', endDate: '02/02/2023'},
-        {name: 'Історія голосування2', buttonType: 'history', endDate: '03/03/2024'}
     ];
     return(
         <div className="MyElections">
