@@ -16,4 +16,11 @@
 
 .candidate-name {
     font-size: 21px;
+    width: 500px;
+}
+
+.CandidateList hr {
+    width: 90%;
+    margin: 20px auto;
+    border: 2px solid black;
 }

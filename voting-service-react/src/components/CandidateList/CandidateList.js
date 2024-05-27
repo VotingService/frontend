@@ -9,18 +9,21 @@ export default function CandidateList(){
         {name: 'Зеленський Володимир Олександрович'}
     ];
     let renderedCandidates = candidates.map(candidate =>
-    <li>
-        <div className="candidate-name">{candidate.name}</div>
-        <a>Про кандидата</a>
-        <button>Проголосувати</button>
-        <hr />
-    </li>)
-    return(
+        <div>
+            <li>
+                <div className="candidate-name">{candidate.name}</div>
+                <a>Про кандидата</a>
+                <button>Проголосувати</button>
+            </li>
+            <hr/>
+        </div>)
+    return (
         <div className="CandidateList">
             <h1>Список кандидатів для голосування</h1>
             <ul>
                 {renderedCandidates}
             </ul>
+            <div className="bottom"></div>
         </div>
     )
 }
