@@ -1,0 +1,22 @@
+.available-blocks {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.available {
+  padding-top: 100px;
+}
+
+.no-available {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.Home>h1 {
+  display: flex;
+  justify-content: center;
+}
