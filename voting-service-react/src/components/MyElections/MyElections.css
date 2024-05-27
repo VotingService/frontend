@@ -1,0 +1,45 @@
+.MyElections {
+    display: flex;
+}
+
+.MyElections h1 {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.sort {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 50px;
+    width: 1100px;
+}
+
+.sort-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.sort-buttons button{
+    width: 200px;
+}
+
+.sort-by{
+    padding-left: 50px;
+    padding-top: 3px;
+}
+
+.MyElections input {
+    width: 800px;
+    margin-top: 40px;
+    margin-left: 120px;
+}
+
+.search-button {
+    width: 80px;
+}
+
+.MyElections .available-blocks {
+    max-width: 1100px;
+}
+
