@@ -3,9 +3,9 @@ import Block from "./Block";
 
 export default function Blocks(props){
     let sortBy = props.sortBy.sortBy;
-    let searchValue = props.searchValue.searchValue;
+    let searchValue = props.searchValue ? props.searchValue.searchValue : null;
     let itemList = props.blocks;
-    let foundItems = itemList.filter(item => item.name.search(searchValue) !== -1);
+    let foundItems = searchValue ? itemList.filter(item => item.name.search(searchValue) !== -1) : itemList;
     let sortedItems = [];
     if (sortBy === 'name'){
         sortedItems = foundItems.sort(function (a, b) {

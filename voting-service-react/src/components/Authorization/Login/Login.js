@@ -1,5 +1,6 @@
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { FaLock } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "../Authorize.css"
 
 function Login() {
@@ -20,7 +21,7 @@ function Login() {
                     <a href="#">Забули пароль?</a>
                 </div>
 
-                <button type="submit">Увійти</button>
+                <Link to={"/home"} className="enter-button" type="submit">Увійти</Link>
 
                 <div className="register-link">
                     <p>Вперше тут? <a href="/register">Зареєструйтесь</a></p>

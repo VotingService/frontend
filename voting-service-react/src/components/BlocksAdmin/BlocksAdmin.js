@@ -10,7 +10,7 @@ export default function BlocksAdmin(){
     ];
     let renderedBlocks = blocks.map(item =>
         <BlockAdmin name={item.name} buttonType={item.buttonType}
-               key={blocks.indexOf(item)}></BlockAdmin>)
+            key={blocks.indexOf(item)}></BlockAdmin>)
     return(
         <div className="BlocksAdmin">
             {renderedBlocks}

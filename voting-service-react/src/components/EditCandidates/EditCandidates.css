@@ -1,0 +1,104 @@
+.change-user-role-page {
+  display: flex;
+}
+
+.no-panel{
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  color: rgb(0, 11, 91);
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+}
+
+.search-button {
+  background-color: rgb(0, 78, 147);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  padding: 8px 12px;
+  margin-left: 10px;
+}
+
+.autocomplete-dropdown {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 300px; /* Set max height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  z-index: 1;
+}
+
+.autocomplete-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.autocomplete-item:hover {
+  background-color: rgb(0, 78, 147);
+  color: white;
+}
+
+.chosen-users {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.user-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.change-role-button {
+  background-color: rgb(0, 11, 91);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.save-button {
+  background-color: rgb(0, 78, 147);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  padding: 10px 15px;
+  width: 100%;
+  text-decoration: none;
+  text-align: center;
+}
+
+.save-button:hover {
+  background-color: rgb(0, 11, 91);
+}

@@ -2,6 +2,7 @@ import { HiOutlineMailOpen } from "react-icons/hi";
 import { FaLock } from "react-icons/fa";
 import { SiGoogledocs } from "react-icons/si";
 import { FaLocationDot } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import "../Authorize.css"
 import {useEffect, useState} from "react";
 import {register} from "../../../API/API";
@@ -77,7 +78,7 @@ function Register(){
                     <FaLock className="icon"/>
                 </div>
 
-                <button type="submit">Зареєструватись</button>
+                <Link className="enter-button" to={"home"} type="submit">Зареєструватись</Link>
 
                 <div className="register-link">
                     <p>Уже зареєстровані? <a href="/">Вхід</a></p>
