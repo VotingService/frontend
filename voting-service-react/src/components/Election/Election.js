@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Election.css"
 
 function Election(){
@@ -65,7 +66,7 @@ function Election(){
     <div className="candidate-statistics-item">
       <div className="candidate-statistics-item__info">
         <h5>{candidate.name} {candidate["by-father"]} {candidate.surname}</h5>
-        <a>Про кандидата</a>
+        <Link to={"/candidate"} className="about-button">Про кандидата</Link>
       </div>
       <div style={{width: electionBarWidth}} className="candidate-statistics-item__bar">
         <div className="candidate-statistics-item__bar__filled" style={{width: candidate.votes_percent / 100 * electionBarWidth}}></div>
@@ -77,6 +78,7 @@ function Election(){
     <div className="election-page">
       <h1 className="election-name">{election.name}</h1>
       <h4>{election["start-time"]} - {election["end-time"]}</h4>
+      <h2>Переможець:</h2>
       <div className="election-winner-block">
         <img alt="winner-icon" src={electionWinner.image_uri}/>
         <div className="election-winner-block__info">
