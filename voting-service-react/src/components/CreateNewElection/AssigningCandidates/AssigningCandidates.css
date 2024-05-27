@@ -98,6 +98,8 @@
   cursor: pointer;
   padding: 10px 15px;
   width: 100%;
+  text-decoration: none;
+  text-align: center;
 }
 
 .create-button:hover {

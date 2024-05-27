@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./AssigningCandidates.css"
 import AdminPanel from "../../AdminPanel/AdminPanel"
+import { Link } from 'react-router-dom';
 
 const candidateList = [
   { id: 1, name: 'John Doe' },
@@ -96,9 +97,9 @@ function AssigningCandidates(){
           </div>
         ))}
       </div>
-      <button className="create-button" onClick={handleCreate}>
+      <Link to={"/election-success"} className="create-button" onClick={handleCreate}>
         Створити вибори
-      </button>
+      </Link>
       </div>
     </div>
   );

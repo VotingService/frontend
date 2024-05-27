@@ -1,6 +1,7 @@
 import AdminPanel from "../../AdminPanel/AdminPanel"
 import "./SettingElectionProps.css"
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function SettingElectionProps(){
   const [electionType, setElectionType] = useState('');
@@ -103,7 +104,9 @@ function SettingElectionProps(){
             <option value="no">Ні</option>
           </select>
         </label>
-        <button type="submit" className="continue-button">Продовжити</button>
+        <button type="submit" className="continue-button"><Link className="continue-button__label" to={"/add-candidates"}>
+          Продовжити
+        </Link></button>
       </form>
       </div>
     </div>

@@ -17,6 +17,7 @@ import SettingElectionProps from './components/CreateNewElection/SettingElection
 import HomeAdmin from "./components/HomeAdmin/HomeAdmin";
 import MyElections from "./components/MyElections/MyElections";
 import AssigningCandidates from './components/CreateNewElection/AssigningCandidates/AssigningCandidates';
+import ElectionSuccess from './components/CreateNewElection/ElectionSuccess/ElectionSuccess';
 
 function App() {
     return (
@@ -35,6 +36,7 @@ function App() {
                 <Route path="/home-admin" element={<HomeAdmin/>}/>
                 <Route path="/myelections-admin" element={<MyElections/>}/>
                 <Route path="/add-candidates" element={<AssigningCandidates/>}/>
+                <Route path="/election-success" element={<ElectionSuccess/>}/>
             </Routes>
         </Router>
     );
