@@ -11,7 +11,7 @@ export default function History() {
         <div className="History">
             <h1>Ваша історія голосувань:</h1>
             {history.length === 0 ? <div className="no-available">Ви не брали участь у голосуваннях раніше.</div> :
-                <Blocks blocks={history} className="history-blocks"></Blocks>}
+                <Blocks blocks={history} sortBy={"endDate"} className="history-blocks"></Blocks>}
             <div className="bottom"></div>
         </div>
     )

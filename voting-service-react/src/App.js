@@ -20,6 +20,7 @@ import AssigningCandidates from './components/CreateNewElection/AssigningCandida
 import ElectionSuccess from './components/CreateNewElection/ElectionSuccess/ElectionSuccess';
 import CandidateList from "./components/CandidateList/CandidateList";
 import EditCandidates from './components/EditCandidates/EditCandidates';
+import AvailableElections from './components/AvailableElections/AvailableElections';
 
 function App() {
     return (
@@ -41,6 +42,7 @@ function App() {
                 <Route path="/election-success" element={<ElectionSuccess/>}/>
                 <Route path="/candidatelist" element={<CandidateList/>}/>
                 <Route path="/edit-candidates" element={<EditCandidates/>}/>
+                <Route path="/available-elections" element={<AvailableElections/>}/>
             </Routes>
         </Router>
     );
