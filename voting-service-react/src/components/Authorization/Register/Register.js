@@ -4,12 +4,12 @@ import { SiGoogledocs } from "react-icons/si";
 import { FaLocationDot } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import "../Authorize.css"
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {register} from "../../../API/API";
 import {useNavigate} from "react-router-dom";
 
 function Register(){
-    sessionStorage.clear()
+    sessionStorage.clear();
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [byFather, setByFather] = useState('');
