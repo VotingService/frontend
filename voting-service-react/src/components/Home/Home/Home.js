@@ -22,13 +22,13 @@ export default function Home() {
         <div className="Home">
             <h1 className="available">Доступні для вас голосування:</h1>
             {available.length === 0 ? <div className="no-available">Зараз немає доступних для вас голосувань.</div> :
-                <Blocks blocks={available} className="available-blocks"></Blocks>}
+                <Blocks blocks={available} sortBy={"endDate"} className="available-blocks"></Blocks>}
             <h1 className="soon">Скоро відбудуться:</h1>
             {soon.length === 0 ? <div className="no-available">Зараз немає доступних голосувань.</div> :
-                <Blocks blocks={soon} className="available-blocks"></Blocks>}
+                <Blocks blocks={soon} sortBy={"endDate"} className="available-blocks"></Blocks>}
             <h1 className="soon">Відбуваються зараз:</h1>
             {currently.length === 0 ? <div className="no-available">Зараз немає доступних голосувань.</div> :
-                <Blocks blocks={currently} className="available-blocks"></Blocks>}
+                <Blocks blocks={currently} sortBy={"endDate"} className="available-blocks"></Blocks>}
             <div className="bottom"></div>
         </div>
     )
