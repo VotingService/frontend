@@ -59,7 +59,7 @@ export default function CandidateList(){
         } else {
             console.log('Selected Candidates IDs:', selectedCandidates);
         }
-        navigate("/home")
+        navigate("/voting-success");
     };
 
     const remainingPoints = totalPoints - Object.values(pointsDistribution).reduce((a, b) => a + b, 0);
