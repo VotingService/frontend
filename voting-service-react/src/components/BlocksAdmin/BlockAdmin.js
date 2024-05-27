@@ -6,7 +6,7 @@ export default function BlockAdmin(props){
         <div className="BlockAdmin">
             <div className="block-name">{props.name}</div>
             <Link to={props.buttonType === "Створити нові вибори" ? "/set-elect-props" : 
-                props.buttonType === "Редагування кандидатів" ? "#" : "/myelections-admin"} 
+                props.buttonType === "Редагування кандидатів" ? "/edit-candidates" : "/myelections-admin"} 
                 className="block-button">
                     {props.buttonType}
             </Link>
