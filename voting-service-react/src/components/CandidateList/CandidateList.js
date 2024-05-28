@@ -2,6 +2,7 @@ import "./CandidateList.css"
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Header from "../Header/Header";
 
 const ELECTION_TYPE_SINGLE = 'single';
 const ELECTION_TYPE_MULTIPLE = 'multiple';
@@ -67,60 +68,63 @@ export default function CandidateList(){
     const remainingPoints = totalPoints - Object.values(pointsDistribution).reduce((a, b) => a + b, 0);
 
 
-    return (<>
-        {electionType === ELECTION_TYPE_POINTS ? (<h2 className="remaining-points">Залишилось голосів: <br/> {remainingPoints}</h2>) : null}
-        <div className="vote-for-candidate-page">
-            <h1 className="header">Голосування</h1>
-            <h4>Щоб віддати голос, 
-                {electionType == ELECTION_TYPE_POINTS ? " впишіть кількість голосів у квадратик " : electionType === ELECTION_TYPE_SINGLE ? "натисніть на кружечок" : "квадратик"} навпроти імені вибраного кандидата
-            </h4>
-            
-            <div className="candidate-list">
-        {candidates.map((candidate) => (
-            <div key={candidate.id} className="candidate-item">
-                <h3>{candidate.name}</h3>
-                <div className="candidate-item__about-and-input">
-                    <Link className="about" to={"/candidate"}>Про кандидата</Link>
-                    {electionType === ELECTION_TYPE_SINGLE ? 
-                        (<input
-                        type="radio"
-                        name="candidate"
-                        value={candidate.id}
-                        checked={selectedCandidates.includes(candidate.id)}
-                        onChange={() => handleVoteChange(candidate.id)}
-                        />
-                        ) : electionType === ELECTION_TYPE_MULTIPLE ? (
-                            <input
-                            type="checkbox"
-                            name="candidate"
-                            value={candidate.id}
-                            checked={selectedCandidates.includes(candidate.id)}
-                            onChange={() => handleVoteChange(candidate.id)}
-                            />
-                        ) : (
-                            <input
-                            className="point-input"
-                            type="number"
-                            name="candidate"
-                            min="0"
-                            max={remainingPoints + (pointsDistribution[candidate.id] || 0)}
-                            value={pointsDistribution[candidate.id]}
-                            onChange={(e) => handlePointsChange(candidate.id, e.target.value)}
-                            />
-                        )}
+    return (<div>
+            <Header/>
+            <>
+                {electionType === ELECTION_TYPE_POINTS ? (<h2 className="remaining-points">Залишилось голосів: <br/> {remainingPoints}</h2>) : null}
+                <div className="vote-for-candidate-page">
+                    <h1 className="header">Голосування</h1>
+                    <h4>Щоб віддати голос,
+                        {electionType == ELECTION_TYPE_POINTS ? " впишіть кількість голосів у квадратик " : electionType === ELECTION_TYPE_SINGLE ? "натисніть на кружечок" : "квадратик"} навпроти імені вибраного кандидата
+                    </h4>
+
+                    <div className="candidate-list">
+                        {candidates.map((candidate) => (
+                            <div key={candidate.id} className="candidate-item">
+                                <h3>{candidate.name}</h3>
+                                <div className="candidate-item__about-and-input">
+                                    <Link className="about" to={"/candidate"}>Про кандидата</Link>
+                                    {electionType === ELECTION_TYPE_SINGLE ?
+                                        (<input
+                                                type="radio"
+                                                name="candidate"
+                                                value={candidate.id}
+                                                checked={selectedCandidates.includes(candidate.id)}
+                                                onChange={() => handleVoteChange(candidate.id)}
+                                            />
+                                        ) : electionType === ELECTION_TYPE_MULTIPLE ? (
+                                            <input
+                                                type="checkbox"
+                                                name="candidate"
+                                                value={candidate.id}
+                                                checked={selectedCandidates.includes(candidate.id)}
+                                                onChange={() => handleVoteChange(candidate.id)}
+                                            />
+                                        ) : (
+                                            <input
+                                                className="point-input"
+                                                type="number"
+                                                name="candidate"
+                                                min="0"
+                                                max={remainingPoints + (pointsDistribution[candidate.id] || 0)}
+                                                value={pointsDistribution[candidate.id]}
+                                                onChange={(e) => handlePointsChange(candidate.id, e.target.value)}
+                                            />
+                                        )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <button className="submit-button" onClick={handleSubmit} disabled={
+                        electionType === ELECTION_TYPE_POINTS
+                            ? remainingPoints < 0 || remainingPoints === totalPoints
+                            : selectedCandidates.length === 0
+                    }>
+                        Проголосувати
+                    </button>
                 </div>
-            </div>
-        ))}
+            </>
         </div>
-        <button className="submit-button" onClick={handleSubmit} disabled={
-        electionType === ELECTION_TYPE_POINTS 
-        ? remainingPoints < 0 || remainingPoints === totalPoints
-        : selectedCandidates.length === 0
-        }>
-            Проголосувати
-        </button>
-    </div>
-    </>
     );
     
 }
