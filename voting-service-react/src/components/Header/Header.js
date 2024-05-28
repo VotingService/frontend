@@ -12,7 +12,7 @@ const Header = () => {
       <nav className="navbar">
         <ul className="nav-list">
           <li className="nav-item">
-            <Link to={"account"} className="nav-link">
+            <Link to={"/account"} className="nav-link">
               <MdAccountCircle style={{width: 22, height: 22}}/>
               Особистий кабінет
             </Link>

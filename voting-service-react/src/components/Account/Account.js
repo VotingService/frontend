@@ -1,16 +1,10 @@
 import "./Account.css"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from "../Header/Header";
+import { getUserData } from "../../API/API";
 
 function Account() {
-  const [user, setUser] = useState({
-    firstName: 'Устим',
-    secondName: 'Володимирович',
-    lastName: 'Бучко',
-    address: 'Садовського 6, 5, Львів, Україна',
-    email: 'john.doe@example.com',
-    birthDate: '1990-01-01',
-  });
+  const [user, setUser] = useState({});
 
   const [password, setPassword] = useState({
     currentPassword: '',
@@ -50,6 +44,17 @@ function Account() {
     console.log('Password updated:', password);
   };
 
+  useEffect(() => {
+    getUserData(1,
+      {"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`}
+    ).then((res) => {
+      setUser(res.data)
+      console.log(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  }, [])
+
   return (
       <div>
         <Header/>
@@ -69,8 +74,12 @@ function Account() {
               <input type="text" name="secondName" value={user.secondName} onChange={handleChange}/>
             </label>
             <label>
-              Адреса:
-              <input type="text" name="address" value={user.address} onChange={handleChange}/>
+              Країна:
+              <input type="text" name="country" value={user.location.country} onChange={handleChange}/>
+            </label>
+            <label>
+              Місто:
+              <input type="text" name="country" value={user.location.city} onChange={handleChange}/>
             </label>
             <label>
               Електронна адреса:

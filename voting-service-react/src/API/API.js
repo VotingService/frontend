@@ -24,6 +24,6 @@ export async function login(body) {
 
 export async function getUserData(id, headers){
     return await baseRequest({
-        urlPath: `/api/v1/users/${id}`, method: "GET", headers: headers
+        urlPath: `api/v1/users/${id}`, method: "GET", headers: headers
     })
 }
