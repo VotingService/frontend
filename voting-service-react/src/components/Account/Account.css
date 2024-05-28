@@ -29,8 +29,21 @@
   width: 400px;
 }
 
+.account-form{
+  width: 700px;
+}
+
 .password-form{
   max-height: 340px;
+}
+
+.inputs-block{
+  display: flex;
+  width: 100%;
+}
+
+.inputs-block label{
+  margin-right: 5px;
 }
 
 label {

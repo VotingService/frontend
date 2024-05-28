@@ -9,7 +9,9 @@ function Account() {
   const navigate = useNavigate()
   const [location, setLocation] = useState({
     "city": "",
-    "country": ""
+    "country": "",
+    "streetName": "",
+    "houseNumber": ""
   })
   const [user, setUser] = useState({
     "birthDate": "",
@@ -110,26 +112,38 @@ function Account() {
           <h1 className="title">Особистий кабінет</h1>
           <div className="account-page__forms">
           <form className="account-form" onSubmit={handleSubmit}>
-            <label>
-              Прізвище:
-              <input type="text" name="lastName" value={user.lastName} onChange={handleChange}/>
-            </label>
-            <label>
-              Ім'я:
-              <input type="text" name="firstName" value={user.firstName} onChange={handleChange}/>
-            </label>
-            <label>
-              По-батькові:
-              <input type="text" name="secondName" value={user.byFather} onChange={handleChange}/>
-            </label>
-            <label>
-              Країна:
-              <input type="text" name="country" value={location.country} onChange={handleChangeLocation}/>
-            </label>
-            <label>
-              Місто:
-              <input type="text" name="country" value={location.city} onChange={handleChangeLocation}/>
-            </label>
+            <div className="inputs-block">
+              <label>
+                Прізвище:
+                <input type="text" name="lastName" value={user.lastName} onChange={handleChange}/>
+              </label>
+              <label>
+                Ім'я:
+                <input type="text" name="firstName" value={user.firstName} onChange={handleChange}/>
+              </label>
+              <label>
+                По-батькові:
+                <input type="text" name="byFather" value={user.byFather} onChange={handleChange}/>
+              </label>
+            </div>
+            <div className="inputs-block">
+              <label>
+                Країна:
+                <input type="text" name="country" value={location.country} onChange={handleChangeLocation}/>
+              </label>
+              <label>
+                Місто:
+                <input type="text" name="city" value={location.city} onChange={handleChangeLocation}/>
+              </label>
+              <label>
+                Вулиця:
+                <input type="text" name="streetName" value={location.streetName} onChange={handleChangeLocation}/>
+              </label>
+              <label>
+                Будинок:
+                <input type="text" name="houseNumber" value={location.houseNumber} onChange={handleChangeLocation}/>
+              </label>
+            </div>
             <label>
               Електронна адреса:
               <input type="email" name="email" value={user.email} onChange={handleChange} disabled/>
