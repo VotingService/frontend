@@ -2,8 +2,24 @@ import Blocks from "../Blocks/Blocks";
 import "./Home.css"
 import Header from "../../Header/Header";
 import {getUserCanParticipateInElections} from "../../../API/API";
+import {useEffect, useState} from "react";
+import Block from "../Blocks/Block";
 
-export default function Home() {
+export default function Home(props) {
+    const [renderedBlocks, setRenderedBlocks] = useState([]);
+    useEffect(() => {
+        getUserCanParticipateInElections(sessionStorage.getItem("user_id"),
+            {Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`}).then(res => {
+            available = res.data._embedded.elections.map((item) => {
+                return ({name: item.title, buttonType: 'vote'})
+            });
+            setRenderedBlocks(available);
+        }).catch((error) => {
+        });
+    }, []);
+    let renderedBlocks1 = renderedBlocks.map(item =>
+        <Block name={item.name} buttonType={item.buttonType} endDate={item.endDate}
+               key={renderedBlocks.indexOf(item)}></Block>);
     let available = [
         // {name: 'Вибори президента України', buttonType: 'vote'},
         // {name: 'Доступне голосування2', buttonType: 'vote'},
@@ -12,26 +28,22 @@ export default function Home() {
         // {name: 'Доступне голосування2', buttonType: 'vote'},
         // {name: 'Доступне голосування2', buttonType: 'vote'}
     ];
-    getUserCanParticipateInElections(sessionStorage.getItem("user_id"),
-        `Bearer ${sessionStorage.getItem("auth_token")}`).then(res => {
-        available = res.data.elections;
-    }).catch((error) => {});
     let soon = [
-        {name: 'Скоро голосування1', buttonType: 'soon'},
-        {name: 'Скоро голосування2', buttonType: 'soon'}
+        // {name: 'Скоро голосування1', buttonType: 'soon'},
+        // {name: 'Скоро голосування2', buttonType: 'soon'}
     ];
     let currently = [
-        {name: 'Зараз голосування1', buttonType: 'currently'},
-        {name: 'Зараз голосування2', buttonType: 'currently'}
+        // {name: 'Зараз голосування1', buttonType: 'currently'},
+        // {name: 'Зараз голосування2', buttonType: 'currently'}
     ];
     return (
         <div>
             <Header/>
             <div className="Home">
                 <h1 className="available">Доступні для вас голосування:</h1>
-                {available.length === 0 ?
+                {renderedBlocks1.length === 0 ?
                     <div className="no-available">Зараз немає доступних для вас голосувань.</div> :
-                    <Blocks blocks={available} sortBy={''} searchValue={''} className="available-blocks"></Blocks>}
+                    <div className="available-blocks">{renderedBlocks1}</div>}
                 <h1 className="soon">Скоро відбудуться:</h1>
                 {soon.length === 0 ? <div className="no-available">Зараз немає доступних голосувань.</div> :
                     <Blocks blocks={soon} sortBy={''} searchValue={''} className="available-blocks"></Blocks>}
