@@ -19,14 +19,9 @@ function Login() {
                 navigate("/home");
             }
         }).catch((error) => {
-            switch (error.response.status) {
-                case 403:
-                    alert('Помилка! Спробуйте знову.');
-                    break;
-                default:
-                    break
+                alert('Помилка! Неправильний пароль або електронна адреса.');
             }
-        });
+        );
     };
     return (
         <div className='wrapper'>
