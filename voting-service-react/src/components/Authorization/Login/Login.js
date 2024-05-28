@@ -6,7 +6,6 @@ import {useState} from "react";
 import {login} from "../../../API/API";
 
 function Login() {
-    sessionStorage.clear();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -14,9 +13,18 @@ function Login() {
         event.preventDefault();
         let body = {email: email, password: password};
         login(body).then(res => {
+            sessionStorage.clear();
             sessionStorage.setItem("auth_token", res.data.access_token);
+            sessionStorage.setItem("user_id", res.data.id);
+            sessionStorage.setItem("role", res.data.role);
+            console.log(res.data);
             if (sessionStorage.getItem("auth_token")) {
-                navigate("/home");
+                if(sessionStorage.getItem("role") == 'USER'){
+                    navigate("/home");
+                }
+                else if (sessionStorage.getItem("role") == 'ADMIN'){
+                    navigate("/home-admin");
+                }
             }
         }).catch((error) => {
                 alert('Помилка! Неправильний пароль або електронна адреса.');
