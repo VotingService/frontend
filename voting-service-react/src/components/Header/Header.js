@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './Header.css';
 import { MdAccountCircle } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ const Header = () => {
     navigate("/")
   }
   return (
-    <header>
+    <header style={(sessionStorage.getItem("role") === 'ADMIN') ? {display: 'none'} : {}}>
       <nav className="navbar">
         <ul className="nav-list">
           <li className="nav-item">

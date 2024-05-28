@@ -6,10 +6,15 @@
   margin-top: 80px;
 }
 
+.account-page__forms{
+  display: flex;
+  align-items: center;
+}
+
 .title {
   color: rgb(0, 11, 91);
   font-size: 3em;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .account-form, .password-form {
@@ -24,6 +29,10 @@
   width: 400px;
 }
 
+.password-form{
+  max-height: 340px;
+}
+
 label {
   color: rgb(0, 78, 147);
   display: block;
@@ -34,7 +43,7 @@ input {
   border: 1px solid rgb(151, 207, 255);
   border-radius: 4px;
   box-sizing: border-box;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   padding: 8px;
   width: 100%;
   font-size: 15px;

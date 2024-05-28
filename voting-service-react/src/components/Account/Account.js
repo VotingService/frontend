@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Header from "../Header/Header";
 import { getUserData, updateUserData, changePassword, login } from "../../API/API";
 import { useNavigate } from "react-router-dom";
+import AdminPanel from "../AdminPanel/AdminPanel";
 
 function Account() {
   const navigate = useNavigate()
@@ -96,9 +97,6 @@ function Account() {
         setLocation(res.data.location)
         console.log(res.data)
       }).catch((err) => {
-        console.log(sessionStorage.getItem("id"))
-        console.log(sessionStorage.getItem("auth_token"))
-        console.log(sessionStorage.getItem("role"))
         console.log(err)
       })
     }
@@ -106,10 +104,11 @@ function Account() {
   },[])
 
   return (
-      <div>
-        <Header/>
-        <div className="account-page">
+      <div style={(sessionStorage.getItem("role") === 'ADMIN') ? {display: "flex"} : {}}>
+        {sessionStorage.getItem("role") === 'USER' ? <Header/> : <AdminPanel/>}
+        <div className="account-page" style={(sessionStorage.getItem("role") === 'ADMIN') ? {marginTop: 0, display: "flex", flexDirection: "column"} : {}}>
           <h1 className="title">Особистий кабінет</h1>
+          <div className="account-page__forms">
           <form className="account-form" onSubmit={handleSubmit}>
             <label>
               Прізвище:
@@ -159,6 +158,7 @@ function Account() {
             </label>
             <button type="submit">Змінити пароль</button>
           </form>
+          </div>
         </div>
       </div>
 
