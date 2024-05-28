@@ -1,11 +1,9 @@
-import Blocks from "../Blocks/Blocks";
 import "./Home.css"
 import Header from "../../Header/Header";
 import {getUserCanParticipateInElections} from "../../../API/API";
 import {useEffect, useState} from "react";
 import Block from "../Blocks/Block";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 export default function Home(props) {
     const [renderedAvailableBlocks, setRenderedAvailableBlocks] = useState([]);
@@ -29,12 +27,10 @@ export default function Home(props) {
         <Block name={item.name} buttonType={item.buttonType} endDate={item.endDate}
                key={renderedAvailableBlocks.indexOf(item)}></Block>);
     let renderedSoonBlocks1 = renderedSoonBlocks.map(item =>
-        <Block name={item.name} buttonType={item.buttonType} endDate={item.endDate}
+        <Block name={item.name} buttonType={''} endDate={item.endDate}
                key={renderedSoonBlocks.indexOf(item)}></Block>);
 
-export default function Home() {
     const  navigate = useNavigate()
-
     let available = [
         // {name: 'Вибори президента України', buttonType: 'vote'},
         // {name: 'Доступне голосування2', buttonType: 'vote'},
