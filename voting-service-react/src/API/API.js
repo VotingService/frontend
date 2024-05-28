@@ -51,3 +51,9 @@ export async function getAllUsers(headers){
         urlPath: "api/v1/users", method: "GET", headers: headers
     })
 }
+
+export async function registerUserAsCandidate(headers, electionId, candidateId){
+    return await baseRequest({
+        urlPath: `api/v1/admin/registerAsCandidate/${electionId}/${candidateId}`, method: "POST", headers: headers
+    })
+}

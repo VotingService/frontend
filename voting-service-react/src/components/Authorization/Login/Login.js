@@ -1,6 +1,6 @@
 import {HiOutlineMailOpen} from "react-icons/hi";
 import {FaLock} from "react-icons/fa";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import "../Authorize.css"
 import {useState, useEffect} from "react";
 import {login} from "../../../API/API";
@@ -16,12 +16,11 @@ function Login() {
             sessionStorage.setItem("auth_token", res.data.access_token);
             sessionStorage.setItem("user_id", res.data.id);
             sessionStorage.setItem("role", res.data.role);
-            console.log(res.data);
             if (sessionStorage.getItem("auth_token")) {
-                if(sessionStorage.getItem("role") == 'USER'){
+                if(sessionStorage.getItem("role") === 'USER'){
                     navigate("/home");
                 }
-                else if (sessionStorage.getItem("role") == 'ADMIN'){
+                else if (sessionStorage.getItem("role") === 'ADMIN'){
                     navigate("/home-admin");
                 }
             }

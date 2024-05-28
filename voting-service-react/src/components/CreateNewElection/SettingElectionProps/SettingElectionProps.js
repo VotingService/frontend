@@ -1,7 +1,7 @@
 import AdminPanel from "../../AdminPanel/AdminPanel"
 import "./SettingElectionProps.css"
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createElection } from "../../../API/API";
 
 function SettingElectionProps(){
@@ -47,13 +47,22 @@ function SettingElectionProps(){
     newElection.canRetractVote = formData.allowanceToChangeVote === 'yes';
     newElection.title = formData.electionName;
     newElection.votingStrategy = electionType === 'Єдиний голос' ? 'PluralityVoting': electionType === 'Множинний голос' ? 'ApprovalVoting' : 'DistributionVoting';
-    newElection.maxVotes = formData.maxVotes === 1 ? formData.maxVotes : null;
+    newElection.maxVotes = formData.maxVotes === 1 ? null : formData.maxVotes;
     newElection.startDate = `${formData.startDate}T00:00:00`;
     newElection.endDate = `${formData.endDate}T00:00:00`;
     newElection.location = newElectionLocation;
+    console.log(newElection);
     createElection(newElection, 
       {"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`})
-    console.log('Election created:', newElection);
+    .then((res) => {
+      sessionStorage.removeItem("new-election-id")
+      sessionStorage.setItem("new-election-id", res.data.id)
+      alert("Вибори успішно створено! Час додати кандидатів")
+      navigate('/add-candidates')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   };
 
   const handleChangeLocation = (e) => {
@@ -83,16 +92,17 @@ function SettingElectionProps(){
             name="electionName"
             value={formData.electionName}
             onChange={handleChange}
+            required
           />
         </label>
         <div className="inputs-block">
           <label>
             Країна:
-            <input type="text" name="country" value={newElectionLocation.country} onChange={handleChangeLocation}/>
+            <input type="text" name="country" value={newElectionLocation.country} onChange={handleChangeLocation} required/>
           </label>
           <label>
             Місто:
-            <input type="text" name="city" value={newElectionLocation.city} onChange={handleChangeLocation}/>
+            <input placeholder="Не обов'язково" type="text" name="city" value={newElectionLocation.city} onChange={handleChangeLocation}/>
           </label>
         </div>
         <div className="inputs-block">
@@ -103,6 +113,7 @@ function SettingElectionProps(){
               name="startDate"
               value={formData.startDate}
               onChange={handleChange}
+              required
             />
           </label>
           <label>
@@ -112,6 +123,7 @@ function SettingElectionProps(){
               name="endDate"
               value={formData.endDate}
               onChange={handleChange}
+              required
             />
           </label>
         </div>
@@ -123,6 +135,7 @@ function SettingElectionProps(){
               name="electionType"
               value={electionType}
               readOnly
+              required
             />
             <button type="button" onClick={() => setShowDropdown(!showDropdown)}>
               Вибрати
@@ -156,12 +169,13 @@ function SettingElectionProps(){
                 value={formData.maxVotes}
                 onChange={handleChange}
                 disabled={!(electionType === 'Оцінка')}
+                required
               />
             </label>
           </div>
-        <button onClick={handleSubmit} type="submit" className="continue-button"><Link className="continue-button__label" to={"/add-candidates"}>
+        <button type="submit" className="continue-button">
           Продовжити
-        </Link></button>
+        </button>
       </form>
       </div>
     </div>
