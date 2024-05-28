@@ -1,17 +1,29 @@
 import axios from "axios"
 
-async function baseRequest({urlPath = '', body}) {
-    return axios.post('http://localhost:8080/' + urlPath, body);
+async function baseRequest({urlPath = '', method, body, headers}) {
+    let props = {
+        method: method,
+        url: 'http://127.0.0.1:8080/' + urlPath,
+        headers: headers,
+        data: body
+    }
+    return axios(props);
 }
 
 export async function register(body) {
     return await baseRequest({
-        urlPath: 'api/v1/auth/register', body: body,
+        urlPath: 'api/v1/auth/register', body: body, method: "POST"
     })
 }
 
 export async function login(body) {
     return await baseRequest({
-        urlPath: 'api/v1/auth/authenticate', body: body
+        urlPath: 'api/v1/auth/authenticate', body: body, method: "POST"
+    })
+}
+
+export async function getUserData(id, headers){
+    return await baseRequest({
+        urlPath: `/api/v1/users/${id}`, method: "GET", headers: headers
     })
 }
