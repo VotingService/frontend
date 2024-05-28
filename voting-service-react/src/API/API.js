@@ -3,7 +3,7 @@ import axios from "axios"
 async function baseRequest({urlPath = '', method, body, headers}) {
     let props = {
         method: method,
-        url: 'http://127.0.0.1:8080/' + urlPath,
+        url: 'http://localhost:8080/' + urlPath,
         headers: headers,
         data: body
     }
@@ -38,4 +38,9 @@ export async function changePassword(body, headers){
     return await baseRequest({
         urlPath: "api/v1/users/changePassword", method: "PATCH", headers: headers, body: body
     })
+}
+
+export async function getUserCanParticipateInElections(id, headers) {
+    return await baseRequest({urlPath: `api/v1/election/userCanParticipateIn/${id}`,
+    method: "GET", headers: headers})
 }
