@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Election.css"
+import Header from "../Header/Header";
 
 function Election(){
   let rendered_statistics = []
@@ -75,20 +76,25 @@ function Election(){
     </div>
   ))
   return(
-    <div className="election-page">
-      <h1 className="election-name">{election.name}</h1>
-      <h4>{election["start-time"]} - {election["end-time"]}</h4>
-      <h2>Переможець:</h2>
-      <div className="election-winner-block">
-        <img alt="winner-icon" src={electionWinner.image_uri}/>
-        <div className="election-winner-block__info">
-          <h2>{electionWinner.name} {electionWinner["by-father"]} {electionWinner.surname}</h2>
-          <p>{electionWinner.description}</p>
+      <div>
+        <Header/>
+        <div className="election-page">
+          <h1 className="election-name">{election.name}</h1>
+          <h4>{election["start-time"]} - {election["end-time"]}</h4>
+          <h2>Переможець:</h2>
+          <div className="election-winner-block">
+            <img alt="winner-icon" src={electionWinner.image_uri}/>
+            <div className="election-winner-block__info">
+              <h2>{electionWinner.name} {electionWinner["by-father"]} {electionWinner.surname}</h2>
+              <p>{electionWinner.description}</p>
+            </div>
+          </div>
+          <button className="show-hide-statistics-button"
+                  onClick={() => seIsStatisticsShown(!isStatisticsShown)}>{isStatisticsShown ? "Сховати" : "Відобразити"} результати
+          </button>
+          {isStatisticsShown ? <div className="statistics-block"> {rendered_statistics} </div> : null}
         </div>
       </div>
-      <button className="show-hide-statistics-button" onClick={() => seIsStatisticsShown(!isStatisticsShown)}>{isStatisticsShown ? "Сховати" : "Відобразити"} результати</button>
-      {isStatisticsShown ? <div className="statistics-block"> {rendered_statistics} </div> : null}
-    </div>
   )
 }
 

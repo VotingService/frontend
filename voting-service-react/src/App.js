@@ -23,10 +23,10 @@ import EditCandidates from './components/EditCandidates/EditCandidates';
 import AvailableElections from './components/AvailableElections/AvailableElections';
 import VotingSuccess from './components/VotingSuccess/VotingSuccess';
 
+
 function App() {
     return (
         <Router>
-            <Header/>
             <Routes>
                 <Route path="/" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>

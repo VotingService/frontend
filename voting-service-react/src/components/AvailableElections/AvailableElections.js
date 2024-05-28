@@ -1,5 +1,6 @@
 import "./AvailableElections.css"
 import Blocks from "../Home/Blocks/Blocks";
+import Header from "../Header/Header";
 
 export default function AvailableElections() {
   let available = [
@@ -11,10 +12,13 @@ export default function AvailableElections() {
     {name: 'Доступне голосування2', buttonType: 'vote'}
 ];
   return(
-    <div className="Home">
-      <h1 className="available">Доступні для вас голосування:</h1>
-      {available.length === 0 ? <div className="no-available">Зараз немає доступних для вас голосувань.</div> :
-          <Blocks blocks={available} sortBy={"endDate"} className="available-blocks"></Blocks>}
-    </div>
+      <div>
+        <Header/>
+        <div className="Home">
+          <h1 className="available">Доступні для вас голосування:</h1>
+          {available.length === 0 ? <div className="no-available">Зараз немає доступних для вас голосувань.</div> :
+              <Blocks blocks={available} sortBy={"endDate"} className="available-blocks"></Blocks>}
+        </div>
+      </div>
   )
 }

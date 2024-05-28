@@ -1,4 +1,5 @@
 import "./CandidateList.css"
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -6,6 +7,7 @@ const ELECTION_TYPE_SINGLE = 'single';
 const ELECTION_TYPE_MULTIPLE = 'multiple';
 const ELECTION_TYPE_POINTS = 'points';
 const totalPoints = 100;
+
 
 export default function CandidateList(){
     const navigate = useNavigate();
