@@ -3,7 +3,7 @@ import axios from "axios"
 async function baseRequest({urlPath = '', method, body, headers}) {
     let props = {
         method: method,
-        url: 'http://127.0.0.1:8080/' + urlPath,
+        url: 'http://localhost:8080/' + urlPath,
         headers: headers,
         data: body
     }
@@ -43,5 +43,27 @@ export async function changePassword(body, headers){
 export async function getAllBallotsByUser(headers, userId){
     return await baseRequest({
         urlPath: `api/v1/ballots/voter/${userId}`, method: "GET", headers: headers
+    })}
+
+export async function createElection(body, headers){
+    return await baseRequest({
+        urlPath: "api/v1/admin/createElection", method: "POST", headers: headers, body: body
     })
+}
+
+export async function getAllUsers(headers){
+    return await baseRequest({
+        urlPath: "api/v1/users", method: "GET", headers: headers
+    })
+}
+
+export async function registerUserAsCandidate(headers, electionId, candidateId){
+    return await baseRequest({
+        urlPath: `api/v1/admin/registerAsCandidate/${electionId}/${candidateId}`, method: "POST", headers: headers
+    })
+}
+
+export async function getUserCanParticipateInElections(id, headers) {
+    return await baseRequest({urlPath: `api/v1/election/userCanParticipateIn/${id}`,
+    method: "GET", headers: headers})
 }
