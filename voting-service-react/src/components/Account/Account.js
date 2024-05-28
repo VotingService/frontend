@@ -89,18 +89,21 @@ function Account() {
     if (!sessionStorage.getItem("role")){
       navigate("/")
     } else {
-      getUserData(1,
+      getUserData(sessionStorage.getItem("user_id"),
         {"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`}
       ).then((res) => {
         setUser(res.data)
         setLocation(res.data.location)
         console.log(res.data)
       }).catch((err) => {
+        console.log(sessionStorage.getItem("id"))
+        console.log(sessionStorage.getItem("auth_token"))
+        console.log(sessionStorage.getItem("role"))
         console.log(err)
       })
     }
     
-  })
+  },[])
 
   return (
       <div>
