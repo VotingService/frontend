@@ -1,9 +1,11 @@
 import "./MyElections.css"
 import AdminPanel from "../AdminPanel/AdminPanel";
 import Blocks from "../Home/Blocks/Blocks";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function MyElections(){
+    const  navigate = useNavigate()
     const [sortBy, setSortBy] = useState({sortBy: ''});
     const [searchValue, setSearchValue] = useState({searchValue: ''});
     let myElections = [
@@ -11,6 +13,13 @@ export default function MyElections(){
         {name: 'Історія голосування2', buttonType: 'history', endDate: '02/02/2023'},
         {name: 'Історія голосування2', buttonType: 'history', endDate: '02/02/2023'},
     ];
+    useEffect(() => {
+        if(sessionStorage.getItem("role") === 'USER'){
+            navigate("/home")
+        } else if (!sessionStorage.getItem("role")){
+            navigate("/")
+        }
+    })
     return(
         <div className="MyElections">
             <AdminPanel></AdminPanel>

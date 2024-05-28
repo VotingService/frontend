@@ -4,6 +4,8 @@ import Header from "../../Header/Header";
 import {getUserCanParticipateInElections} from "../../../API/API";
 import {useEffect, useState} from "react";
 import Block from "../Blocks/Block";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Home(props) {
     const [renderedAvailableBlocks, setRenderedAvailableBlocks] = useState([]);
@@ -29,6 +31,10 @@ export default function Home(props) {
     let renderedSoonBlocks1 = renderedSoonBlocks.map(item =>
         <Block name={item.name} buttonType={item.buttonType} endDate={item.endDate}
                key={renderedSoonBlocks.indexOf(item)}></Block>);
+
+export default function Home() {
+    const  navigate = useNavigate()
+
     let available = [
         // {name: 'Вибори президента України', buttonType: 'vote'},
         // {name: 'Доступне голосування2', buttonType: 'vote'},
@@ -41,6 +47,13 @@ export default function Home(props) {
         // {name: 'Скоро голосування1', buttonType: 'soon'},
         // {name: 'Скоро голосування2', buttonType: 'soon'}
     ];
+    useEffect(() => {
+        if(sessionStorage.getItem("role") === 'ADMIN'){
+            navigate("/home-admin")
+        } else if (!sessionStorage.getItem("role")){
+            navigate("/")
+        }
+    })
     return (
         <div>
             <Header/>

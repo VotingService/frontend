@@ -1,21 +1,32 @@
 import "./Account.css"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from "../Header/Header";
+import { getUserData, updateUserData, changePassword, login } from "../../API/API";
+import { useNavigate } from "react-router-dom";
+import AdminPanel from "../AdminPanel/AdminPanel";
 
 function Account() {
+  const navigate = useNavigate()
+  const [location, setLocation] = useState({
+    "city": "",
+    "country": "",
+    "streetName": "",
+    "houseNumber": ""
+  })
   const [user, setUser] = useState({
-    firstName: 'Устим',
-    secondName: 'Володимирович',
-    lastName: 'Бучко',
-    address: 'Садовського 6, 5, Львів, Україна',
-    email: 'john.doe@example.com',
-    birthDate: '1990-01-01',
-  });
+    "birthDate": "",
+    "email": "",
+    "firstName": "",
+    "id": 0,
+    "byFather": "",
+    "lastName": "",
+    "location": location,
+    "password": ""});
 
   const [password, setPassword] = useState({
     currentPassword: '',
     newPassword: '',
-    confirmPassword: '',
+    confirmationPassword: '',
   });
 
   const handleChange = (e) => {
@@ -25,6 +36,14 @@ function Account() {
       [name]: value,
     }));
   };
+
+  const handleChangeLocation = (e) => {
+    const {name, value} = e.target;
+    setLocation((prevLocation) => ({
+      ...prevLocation,
+      [name]: value
+    }))
+  }
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;
@@ -36,45 +55,98 @@ function Account() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Logic to update user information
-    console.log('User updated:', user);
+    updateUserData(
+      user, 
+      {"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`}
+    ).then((res) => {
+      alert("Інформація успішно оновлена")
+    }).catch((err) => {
+      console.log(err)
+    })
   };
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    if (password.newPassword !== password.confirmPassword) {
-      alert('New password and confirm password do not match!');
+    if (password.newPassword !== password.confirmationPassword) {
+      alert('Новий пароль та повторний пароль не збігаються!');
       return;
     }
-    // Logic to update password
-    console.log('Password updated:', password);
+    changePassword(password, {"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`})
+    .then((res) => {
+      alert("Пароль успішно змінено!")
+      setPassword({currentPassword: '',
+      newPassword: '',
+      confirmationPassword: '',})
+      login({"email": user.email, "password": password.newPassword})
+      .then((res) => {
+        sessionStorage.removeItem("auth_token")
+        sessionStorage.setItem("auth_token", res.data.access_token)
+        console.log("token changed")
+      })
+    }).catch((err) => {
+      console.log(err)
+    })
   };
 
+  useEffect(() => {
+    if (!sessionStorage.getItem("role")){
+      navigate("/")
+    } else {
+      getUserData(sessionStorage.getItem("user_id"),
+        {"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`}
+      ).then((res) => {
+        setUser(res.data)
+        setLocation(res.data.location)
+        console.log(res.data)
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
+    
+  },[])
+
   return (
-      <div>
-        <Header/>
-        <div className="account-page">
+      <div style={(sessionStorage.getItem("role") === 'ADMIN') ? {display: "flex"} : {}}>
+        {sessionStorage.getItem("role") === 'USER' ? <Header/> : <AdminPanel/>}
+        <div className="account-page" style={(sessionStorage.getItem("role") === 'ADMIN') ? {marginTop: 0, display: "flex", flexDirection: "column"} : {}}>
           <h1 className="title">Особистий кабінет</h1>
+          <div className="account-page__forms">
           <form className="account-form" onSubmit={handleSubmit}>
-            <label>
-              Прізвище:
-              <input type="text" name="lastName" value={user.lastName} onChange={handleChange}/>
-            </label>
-            <label>
-              Ім'я:
-              <input type="text" name="firstName" value={user.firstName} onChange={handleChange}/>
-            </label>
-            <label>
-              По-батькові:
-              <input type="text" name="secondName" value={user.secondName} onChange={handleChange}/>
-            </label>
-            <label>
-              Адреса:
-              <input type="text" name="address" value={user.address} onChange={handleChange}/>
-            </label>
+            <div className="inputs-block">
+              <label>
+                Прізвище:
+                <input type="text" name="lastName" value={user.lastName} onChange={handleChange}/>
+              </label>
+              <label>
+                Ім'я:
+                <input type="text" name="firstName" value={user.firstName} onChange={handleChange}/>
+              </label>
+              <label>
+                По-батькові:
+                <input type="text" name="byFather" value={user.byFather} onChange={handleChange}/>
+              </label>
+            </div>
+            <div className="inputs-block">
+              <label>
+                Країна:
+                <input type="text" name="country" value={location.country} onChange={handleChangeLocation}/>
+              </label>
+              <label>
+                Місто:
+                <input type="text" name="city" value={location.city} onChange={handleChangeLocation}/>
+              </label>
+              <label>
+                Вулиця:
+                <input type="text" name="streetName" value={location.streetName} onChange={handleChangeLocation}/>
+              </label>
+              <label>
+                Будинок:
+                <input type="text" name="houseNumber" value={location.houseNumber} onChange={handleChangeLocation}/>
+              </label>
+            </div>
             <label>
               Електронна адреса:
-              <input type="email" name="email" value={user.email} onChange={handleChange}/>
+              <input type="email" name="email" value={user.email} onChange={handleChange} disabled/>
             </label>
             <label>
               Дата народження:
@@ -87,7 +159,7 @@ function Account() {
             <label>
               Ваш пароль:
               <input type="password" name="currentPassword" value={password.currentPassword}
-                     onChange={handlePasswordChange}/>
+                onChange={handlePasswordChange}/>
             </label>
             <label>
               Новий пароль:
@@ -95,11 +167,12 @@ function Account() {
             </label>
             <label>
               Повторіть новий пароль:
-              <input type="password" name="confirmPassword" value={password.confirmPassword}
+              <input type="password" name="confirmationPassword" value={password.confirmationPassword}
                      onChange={handlePasswordChange}/>
             </label>
             <button type="submit">Змінити пароль</button>
           </form>
+          </div>
         </div>
       </div>
 

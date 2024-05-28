@@ -1,9 +1,10 @@
 import AdminPanel from "../../AdminPanel/AdminPanel"
 import "./SettingElectionProps.css"
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function SettingElectionProps(){
+  const navigate = useNavigate()
   const [electionType, setElectionType] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
   const [formData, setFormData] = useState({
@@ -29,6 +30,12 @@ function SettingElectionProps(){
     // Logic to handle form submission
     console.log('Election created:', { ...formData, electionType });
   };
+
+  useEffect(() => {
+    if(sessionStorage.getItem("role") === 'USER'){
+      navigate("/home")
+    }
+  })
 
   return (
     <div className="new-election-page">

@@ -28,6 +28,18 @@ export async function getUserData(id, headers){
     })
 }
 
+export async function updateUserData(body, headers){
+    return await baseRequest({
+        urlPath: "api/v1/users", method: "PUT", headers: headers, body: body
+    })
+}
+
+export async function changePassword(body, headers){
+    return await baseRequest({
+        urlPath: "api/v1/users/changePassword", method: "PATCH", headers: headers, body: body
+    })
+}
+
 export async function getUserCanParticipateInElections(id, headers) {
     return await baseRequest({urlPath: `api/v1/election/userCanParticipateIn/${id}`,
     method: "GET", headers: headers})

@@ -1,18 +1,20 @@
 import React from 'react';
 import './Header.css';
 import { MdAccountCircle } from "react-icons/md";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate()
   const handleExit = () => {
-    // delete auth key from storage
+    sessionStorage.removeItem("auth_token")
+    navigate("/")
   }
   return (
-    <header>
+    <header style={(sessionStorage.getItem("role") === 'ADMIN') ? {display: 'none'} : {}}>
       <nav className="navbar">
         <ul className="nav-list">
           <li className="nav-item">
-            <Link to={"account"} className="nav-link">
+            <Link to={"/account"} className="nav-link">
               <MdAccountCircle style={{width: 22, height: 22}}/>
               Особистий кабінет
             </Link>
