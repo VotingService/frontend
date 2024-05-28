@@ -17,7 +17,9 @@ export default function AvailableElections() {
   useEffect(() => {
     if(sessionStorage.getItem("role") === 'USER'){
       navigate("/home")
-    }
+    } else if (!sessionStorage.getItem("role")){
+      navigate("/")
+  }
   })
   return(
       <div>

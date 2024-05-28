@@ -30,8 +30,6 @@ function App() {
             <Routes>
                 <Route path="/" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
-                {sessionStorage.getItem("auth_token") != null ? 
-                <>
                 <Route path="/home" element={<Home/>}/>
                 <Route path="/history" element={<History/>}/>
                 <Route path="/about" element={<About/>}/>
@@ -47,7 +45,6 @@ function App() {
                 <Route path="/account" element={<Account/>}/>
                 <Route path="/candidate" element={<Candidate/>}/>
                 <Route path="/candidatelist" element={<CandidateList/>}/>
-                </> : null}
             </Routes>
         </Router>
     );

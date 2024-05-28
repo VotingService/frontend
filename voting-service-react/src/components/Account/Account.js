@@ -2,8 +2,10 @@ import "./Account.css"
 import React, { useState, useEffect } from 'react';
 import Header from "../Header/Header";
 import { getUserData, updateUserData, changePassword, login } from "../../API/API";
+import { useNavigate } from "react-router-dom";
 
 function Account() {
+  const navigate = useNavigate()
   const [location, setLocation] = useState({
     "city": "",
     "country": ""
@@ -84,16 +86,21 @@ function Account() {
   };
 
   useEffect(() => {
-    getUserData(1,
-      {"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`}
-    ).then((res) => {
-      setUser(res.data)
-      setLocation(res.data.location)
-      console.log(res.data)
-    }).catch((err) => {
-      console.log(err)
-    })
-  }, [])
+    if (!sessionStorage.getItem("role")){
+      navigate("/")
+    } else {
+      getUserData(1,
+        {"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`}
+      ).then((res) => {
+        setUser(res.data)
+        setLocation(res.data.location)
+        console.log(res.data)
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
+    
+  })
 
   return (
       <div>

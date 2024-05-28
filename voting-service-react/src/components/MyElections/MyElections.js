@@ -16,6 +16,8 @@ export default function MyElections(){
     useEffect(() => {
         if(sessionStorage.getItem("role") === 'USER'){
             navigate("/home")
+        } else if (!sessionStorage.getItem("role")){
+            navigate("/")
         }
     })
     return(

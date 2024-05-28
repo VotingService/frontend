@@ -1,6 +1,6 @@
 import "./CandidateList.css"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 
@@ -67,6 +67,11 @@ export default function CandidateList(){
 
     const remainingPoints = totalPoints - Object.values(pointsDistribution).reduce((a, b) => a + b, 0);
 
+    useEffect(() => {
+        if (!sessionStorage.getItem("role")){
+            navigate("/")
+        }
+    })
 
     return (<div>
             <Header/>
@@ -75,7 +80,7 @@ export default function CandidateList(){
                 <div className="vote-for-candidate-page">
                     <h1 className="header">Голосування</h1>
                     <h4>Щоб віддати голос,
-                        {electionType == ELECTION_TYPE_POINTS ? " впишіть кількість голосів у квадратик " : electionType === ELECTION_TYPE_SINGLE ? "натисніть на кружечок" : "квадратик"} навпроти імені вибраного кандидата
+                        {electionType === ELECTION_TYPE_POINTS ? " впишіть кількість голосів у квадратик " : electionType === ELECTION_TYPE_SINGLE ? "натисніть на кружечок" : "квадратик"} навпроти імені вибраного кандидата
                     </h4>
 
                     <div className="candidate-list">

@@ -2,7 +2,7 @@ import {HiOutlineMailOpen} from "react-icons/hi";
 import {FaLock} from "react-icons/fa";
 import {Link, useNavigate} from "react-router-dom";
 import "../Authorize.css"
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {login} from "../../../API/API";
 
 function Login() {
@@ -13,7 +13,6 @@ function Login() {
         event.preventDefault();
         let body = {email: email, password: password};
         login(body).then(res => {
-            sessionStorage.clear();
             sessionStorage.setItem("auth_token", res.data.access_token);
             sessionStorage.setItem("user_id", res.data.id);
             sessionStorage.setItem("role", res.data.role);
@@ -31,6 +30,9 @@ function Login() {
             }
         );
     };
+    useEffect(() => {
+        sessionStorage.clear()
+    })
     return (
         <div className='wrapper'>
             <form action='' onSubmit={onSubmit}>

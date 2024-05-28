@@ -1,7 +1,10 @@
 import "./Candidate.css"
 import Header from "../Header/Header";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Candidate() {
+    const navigate = useNavigate()
     let candidate =
         {
             "name": "Володимир Зеленський Олександрович",
@@ -11,6 +14,11 @@ export default function Candidate() {
                 "ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco " +
                 "laboris nisi ut aliquip ex ea commodo consequat. Zеленський парашенка"
         };
+    useEffect(() => {
+        if (!sessionStorage.getItem("role")){
+            navigate("/")
+        }
+    })
     return (
         <div>
             <Header/>

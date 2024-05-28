@@ -62,7 +62,9 @@ function AssigningCandidates(){
   useEffect(() => {
     if(sessionStorage.getItem("role") === 'USER'){
       navigate("/home")
-    }
+    } else if (!sessionStorage.getItem("role")){
+      navigate("/")
+  }
 })
 
   return (
