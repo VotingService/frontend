@@ -39,3 +39,9 @@ export async function changePassword(body, headers){
         urlPath: "api/v1/users/changePassword", method: "PATCH", headers: headers, body: body
     })
 }
+
+export async function getAllBallotsByUser(headers, userId){
+    return await baseRequest({
+        urlPath: `api/v1/ballots/voter/${userId}`, method: "GET", headers: headers
+    })
+}
