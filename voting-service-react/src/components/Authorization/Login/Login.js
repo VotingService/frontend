@@ -18,6 +18,14 @@ function Login() {
             if (sessionStorage.getItem("auth_token")) {
                 navigate("/home");
             }
+        }).catch((error) => {
+            switch (error.response.status) {
+                case 403:
+                    alert('Помилка! Спробуйте знову.');
+                    break;
+                default:
+                    break
+            }
         });
     };
     return (

@@ -30,6 +30,14 @@ function Register(){
             if (res.data.access_token){
                 navigate("/home");
             }
+        }).catch((error) => {
+            switch (error.response.status) {
+                case 403:
+                    alert('Помилка! Спробуйте знову.');
+                    break;
+                default:
+                    break
+            }
         });
     };
     return(
@@ -78,7 +86,7 @@ function Register(){
                     <FaLock className="icon"/>
                 </div>
 
-                <Link className="enter-button" to={"home"} type="submit">Зареєструватись</Link>
+                <button className="enter-button" type="submit">Зареєструватись</button>
 
                 <div className="register-link">
                     <p>Уже зареєстровані? <a href="/">Вхід</a></p>
