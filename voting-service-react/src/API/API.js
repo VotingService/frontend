@@ -27,3 +27,15 @@ export async function getUserData(id, headers){
         urlPath: `api/v1/users/${id}`, method: "GET", headers: headers
     })
 }
+
+export async function updateUserData(body, headers){
+    return await baseRequest({
+        urlPath: "api/v1/users", method: "PUT", headers: headers, body: body
+    })
+}
+
+export async function changePassword(body, headers){
+    return await baseRequest({
+        urlPath: "api/v1/users/changePassword", method: "PATCH", headers: headers, body: body
+    })
+}

@@ -1,15 +1,27 @@
 import "./Account.css"
 import React, { useState, useEffect } from 'react';
 import Header from "../Header/Header";
-import { getUserData } from "../../API/API";
+import { getUserData, updateUserData, changePassword, login } from "../../API/API";
 
 function Account() {
-  const [user, setUser] = useState({});
+  const [location, setLocation] = useState({
+    "city": "",
+    "country": ""
+  })
+  const [user, setUser] = useState({
+    "birthDate": "",
+    "email": "",
+    "firstName": "",
+    "id": 0,
+    "byFather": "",
+    "lastName": "",
+    "location": location,
+    "password": ""});
 
   const [password, setPassword] = useState({
     currentPassword: '',
     newPassword: '',
-    confirmPassword: '',
+    confirmationPassword: '',
   });
 
   const handleChange = (e) => {
@@ -19,6 +31,14 @@ function Account() {
       [name]: value,
     }));
   };
+
+  const handleChangeLocation = (e) => {
+    const {name, value} = e.target;
+    setLocation((prevLocation) => ({
+      ...prevLocation,
+      [name]: value
+    }))
+  }
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;
@@ -30,18 +50,37 @@ function Account() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Logic to update user information
-    console.log('User updated:', user);
+    updateUserData(
+      user, 
+      {"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`}
+    ).then((res) => {
+      alert("Інформація успішно оновлена")
+    }).catch((err) => {
+      console.log(err)
+    })
   };
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    if (password.newPassword !== password.confirmPassword) {
-      alert('New password and confirm password do not match!');
+    if (password.newPassword !== password.confirmationPassword) {
+      alert('Новий пароль та повторний пароль не збігаються!');
       return;
     }
-    // Logic to update password
-    console.log('Password updated:', password);
+    changePassword(password, {"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`})
+    .then((res) => {
+      alert("Пароль успішно змінено!")
+      setPassword({currentPassword: '',
+      newPassword: '',
+      confirmationPassword: '',})
+      login({"email": user.email, "password": password.newPassword})
+      .then((res) => {
+        sessionStorage.removeItem("auth_token")
+        sessionStorage.setItem("auth_token", res.data.access_token)
+        console.log("token changed")
+      })
+    }).catch((err) => {
+      console.log(err)
+    })
   };
 
   useEffect(() => {
@@ -49,6 +88,7 @@ function Account() {
       {"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`}
     ).then((res) => {
       setUser(res.data)
+      setLocation(res.data.location)
       console.log(res.data)
     }).catch((err) => {
       console.log(err)
@@ -71,19 +111,19 @@ function Account() {
             </label>
             <label>
               По-батькові:
-              <input type="text" name="secondName" value={user.secondName} onChange={handleChange}/>
+              <input type="text" name="secondName" value={user.byFather} onChange={handleChange}/>
             </label>
             <label>
               Країна:
-              <input type="text" name="country" value={user.location.country} onChange={handleChange}/>
+              <input type="text" name="country" value={location.country} onChange={handleChangeLocation}/>
             </label>
             <label>
               Місто:
-              <input type="text" name="country" value={user.location.city} onChange={handleChange}/>
+              <input type="text" name="country" value={location.city} onChange={handleChangeLocation}/>
             </label>
             <label>
               Електронна адреса:
-              <input type="email" name="email" value={user.email} onChange={handleChange}/>
+              <input type="email" name="email" value={user.email} onChange={handleChange} disabled/>
             </label>
             <label>
               Дата народження:
@@ -96,7 +136,7 @@ function Account() {
             <label>
               Ваш пароль:
               <input type="password" name="currentPassword" value={password.currentPassword}
-                     onChange={handlePasswordChange}/>
+                onChange={handlePasswordChange}/>
             </label>
             <label>
               Новий пароль:
@@ -104,7 +144,7 @@ function Account() {
             </label>
             <label>
               Повторіть новий пароль:
-              <input type="password" name="confirmPassword" value={password.confirmPassword}
+              <input type="password" name="confirmationPassword" value={password.confirmationPassword}
                      onChange={handlePasswordChange}/>
             </label>
             <button type="submit">Змінити пароль</button>
