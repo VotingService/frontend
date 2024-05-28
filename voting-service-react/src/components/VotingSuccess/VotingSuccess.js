@@ -1,7 +1,14 @@
 import "./VotingSuccess.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function VotingSuccess() {
+  const  navigate = useNavigate()
+  useEffect(() => {
+    if(sessionStorage.getItem("role") === 'ADMIN'){
+      navigate("/home-admin")
+    }
+})
   return(
       <div className="voting-success-page">
         <h1 className="header">Дякуємо за ваш голос!</h1>

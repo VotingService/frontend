@@ -30,28 +30,24 @@ function App() {
             <Routes>
                 <Route path="/" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
-                {sessionStorage.getItem("role") == 'USER' ? 
-                    <>
-                    <Route path="/home" element={<Home/>}/>
-                    <Route path="/history" element={<History/>}/>
-                    <Route path="/about" element={<About/>}/>
-                    <Route path="/available-elections" element={<AvailableElections/>}/>
-                    <Route path="/voting-success" element={<VotingSuccess/>}/>
-                    </> 
-                    : 
-                    <>
-                    <Route path="/set-elect-props" element={<SettingElectionProps/>}/>
-                    <Route path="/home-admin" element={<HomeAdmin/>}/>
-                    <Route path="/myelections-admin" element={<MyElections/>}/>
-                    <Route path="/add-candidates" element={<AssigningCandidates/>}/>
-                    <Route path="/election-success" element={<ElectionSuccess/>}/>
-                    <Route path="/edit-candidates" element={<EditCandidates/>}/>
-                    </>
-                }
+                {sessionStorage.getItem("auth_token") != null ? 
+                <>
+                <Route path="/home" element={<Home/>}/>
+                <Route path="/history" element={<History/>}/>
+                <Route path="/about" element={<About/>}/>
+                <Route path="/available-elections" element={<AvailableElections/>}/>
+                <Route path="/voting-success" element={<VotingSuccess/>}/>
+                <Route path="/set-elect-props" element={<SettingElectionProps/>}/>
+                <Route path="/home-admin" element={<HomeAdmin/>}/>
+                <Route path="/myelections-admin" element={<MyElections/>}/>
+                <Route path="/add-candidates" element={<AssigningCandidates/>}/>
+                <Route path="/election-success" element={<ElectionSuccess/>}/>
+                <Route path="/edit-candidates" element={<EditCandidates/>}/>
                 <Route path="/election" element={<Election/>}/>
                 <Route path="/account" element={<Account/>}/>
                 <Route path="/candidate" element={<Candidate/>}/>
                 <Route path="/candidatelist" element={<CandidateList/>}/>
+                </> : null}
             </Routes>
         </Router>
     );

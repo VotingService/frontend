@@ -1,8 +1,11 @@
 import Blocks from "../Blocks/Blocks";
 import "./Home.css"
 import Header from "../../Header/Header";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Home() {
+    const  navigate = useNavigate()
     let available = [
         {name: 'Вибори президента України', buttonType: 'vote'},
         {name: 'Доступне голосування2', buttonType: 'vote'},
@@ -19,6 +22,11 @@ export default function Home() {
         {name: 'Зараз голосування1', buttonType: 'currently'},
         {name: 'Зараз голосування2', buttonType: 'currently'}
     ];
+    useEffect(() => {
+        if(sessionStorage.getItem("role") === 'ADMIN'){
+            navigate("/home-admin")
+        }
+    })
     return (
         <div>
             <Header/>

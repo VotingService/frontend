@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './Header.css';
 import { MdAccountCircle } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';

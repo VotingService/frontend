@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./AssigningCandidates.css"
 import AdminPanel from "../../AdminPanel/AdminPanel"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const candidateList = [
   { id: 1, name: 'John Doe' },
@@ -22,6 +22,7 @@ const candidateList = [
 ];
 
 function AssigningCandidates(){
+  const  navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredCandidates, setFilteredCandidates] = useState([]);
   const [chosenCandidates, setChosenCandidates] = useState([]);
@@ -57,6 +58,12 @@ function AssigningCandidates(){
     console.log('Chosen Candidates:', chosenCandidates);
     // Add logic to handle election creation with chosen candidates
   };
+
+  useEffect(() => {
+    if(sessionStorage.getItem("role") === 'USER'){
+      navigate("/home")
+    }
+})
 
   return (
     <div className="add-candidates-page">

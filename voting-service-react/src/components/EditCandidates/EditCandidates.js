@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import AdminPanel from '../AdminPanel/AdminPanel';
 import './EditCandidates.css';
 
@@ -12,6 +12,7 @@ const userList = [
 ];
 
 function EditCandidates() {
+  const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [chosenUsers, setChosenUsers] = useState([]);
@@ -50,6 +51,12 @@ function EditCandidates() {
     console.log('1234')
     console.log('Users with updated roles:', chosenUsers);
   };
+
+  useEffect(() => {
+    if(sessionStorage.getItem("role") === 'USER'){
+        navigate("/home")
+    }
+})
 
   return (
     <div className="change-user-role-page">
