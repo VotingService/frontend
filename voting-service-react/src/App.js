@@ -21,7 +21,8 @@ import ElectionSuccess from './components/CreateNewElection/ElectionSuccess/Elec
 import CandidateList from "./components/CandidateList/CandidateList";
 import EditCandidates from './components/EditCandidates/EditCandidates';
 import AvailableElections from './components/AvailableElections/AvailableElections';
-import {useEffect, useState} from "react";
+import VotingSuccess from './components/VotingSuccess/VotingSuccess';
+
 
 function App() {
     return (
@@ -43,6 +44,7 @@ function App() {
                 <Route path="/candidatelist" element={<CandidateList/>}/>
                 <Route path="/edit-candidates" element={<EditCandidates/>}/>
                 <Route path="/available-elections" element={<AvailableElections/>}/>
+                <Route path="/voting-success" element={<VotingSuccess/>}/>
             </Routes>
         </Router>
     );

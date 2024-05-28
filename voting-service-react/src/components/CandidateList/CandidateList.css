@@ -1,26 +1,96 @@
-.CandidateList h1 {
-    padding-top: 100px;
+.vote-for-candidate-page {
+    width: 850px;
+    margin: 0 auto;
     display: flex;
-    justify-content: center;
+    margin-top: 90px;
+    flex-direction: column;
+    text-align: center;
 }
 
-.CandidateList li {
+h4{
+    margin-bottom: 5px;
+}
+
+.header {
+    color: rgb(0, 11, 91);
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.candidate-list {
     display: flex;
-    padding-top: 50px;
-    justify-content: space-around;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-.CandidateList ul {
-    list-style-type: disc;
+.candidate-item {
+    width: 100%;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.candidate-name {
-    font-size: 21px;
-    width: 500px;
+.candidate-item input{
+    width: 30px;
+    height: 30px;
+    margin: auto 0;
+    cursor: pointer;
 }
 
-.CandidateList hr {
-    width: 90%;
-    margin: 20px auto;
-    border: 2px solid black;
+.candidate-item .point-input{
+    width: 70px;
+}
+
+.candidate-item__about-and-input{
+    display: flex;
+    align-items: center;
+    width: 25%;
+    justify-content: space-between;
+}
+
+.candidate-item__about-and-input .about{
+    color:rgb(0, 11, 91);
+    text-decoration: none;
+}
+
+.candidate-item__about-and-input .about:hover{
+    text-decoration: underline;
+}
+
+.submit-button {
+    background-color: rgb(0, 78, 147);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    padding: 10px 15px;
+    width: 100%;
+    font-size: 1em;
+    margin-bottom: 50px;
+}
+
+.submit-button:hover {
+    background-color: rgb(0, 11, 91);
+}
+
+.submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.remaining-points{
+    position: fixed;
+    margin-left: 40px;
+    margin-top: 40vh;
+    text-align: center;
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 15px;
 }
