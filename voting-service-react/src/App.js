@@ -21,11 +21,11 @@ import ElectionSuccess from './components/CreateNewElection/ElectionSuccess/Elec
 import CandidateList from "./components/CandidateList/CandidateList";
 import EditCandidates from './components/EditCandidates/EditCandidates';
 import AvailableElections from './components/AvailableElections/AvailableElections';
+import {useEffect, useState} from "react";
 
 function App() {
     return (
         <Router>
-            <Header/>
             <Routes>
                 <Route path="/" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>

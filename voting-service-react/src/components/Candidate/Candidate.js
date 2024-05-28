@@ -1,4 +1,5 @@
 import "./Candidate.css"
+import Header from "../Header/Header";
 
 export default function Candidate() {
     let candidate =
@@ -11,15 +12,19 @@ export default function Candidate() {
                 "laboris nisi ut aliquip ex ea commodo consequat. Zеленський парашенка"
         };
     return (
-        <div className="Candidate">
-            <h1>Про кандидата</h1>
-            <div className="candidate-container">
-                <img alt="winner-icon" src={candidate.image_uri}/>
-                <div className="about-candidate">
-                    <h2>{candidate.name}</h2>
-                    <div className="candidate-description">{candidate.description}</div>
+        <div>
+            <Header/>
+            <div className="Candidate">
+                <h1>Про кандидата</h1>
+                <div className="candidate-container">
+                    <img alt="winner-icon" src={candidate.image_uri}/>
+                    <div className="about-candidate">
+                        <h2>{candidate.name}</h2>
+                        <div className="candidate-description">{candidate.description}</div>
+                    </div>
                 </div>
             </div>
         </div>
+
     )
 }

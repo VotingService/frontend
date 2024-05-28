@@ -1,4 +1,6 @@
 import "./CandidateList.css"
+import AbstractModalHeader from "react-bootstrap/AbstractModalHeader";
+import Header from "../Header/Header";
 
 export default function CandidateList(){
     let candidates = [{name: 'Зеленський Володимир Олександрович'},

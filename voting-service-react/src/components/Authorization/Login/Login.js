@@ -15,7 +15,7 @@ function Login() {
         let body = {email: email, password: password};
         login(body).then(res => {
             sessionStorage.setItem("auth_token", res.data.access_token);
-            if (res.data.access_token) {
+            if (sessionStorage.getItem("auth_token")) {
                 navigate("/home");
             }
         });
