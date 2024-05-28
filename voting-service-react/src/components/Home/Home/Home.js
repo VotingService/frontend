@@ -1,16 +1,21 @@
 import Blocks from "../Blocks/Blocks";
 import "./Home.css"
 import Header from "../../Header/Header";
+import {getUserCanParticipateInElections} from "../../../API/API";
 
 export default function Home() {
     let available = [
-        {name: 'Вибори президента України', buttonType: 'vote'},
-        {name: 'Доступне голосування2', buttonType: 'vote'},
-        {name: 'Доступне голосування2', buttonType: 'vote'},
-        {name: 'Доступне голосування2', buttonType: 'vote'},
-        {name: 'Доступне голосування2', buttonType: 'vote'},
-        {name: 'Доступне голосування2', buttonType: 'vote'}
+        // {name: 'Вибори президента України', buttonType: 'vote'},
+        // {name: 'Доступне голосування2', buttonType: 'vote'},
+        // {name: 'Доступне голосування2', buttonType: 'vote'},
+        // {name: 'Доступне голосування2', buttonType: 'vote'},
+        // {name: 'Доступне голосування2', buttonType: 'vote'},
+        // {name: 'Доступне голосування2', buttonType: 'vote'}
     ];
+    getUserCanParticipateInElections(sessionStorage.getItem("user_id"),
+        `Bearer ${sessionStorage.getItem("auth_token")}`).then(res => {
+        available = res.data.elections;
+    }).catch((error) => {});
     let soon = [
         {name: 'Скоро голосування1', buttonType: 'soon'},
         {name: 'Скоро голосування2', buttonType: 'soon'}

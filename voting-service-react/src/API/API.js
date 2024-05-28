@@ -27,3 +27,8 @@ export async function getUserData(id, headers){
         urlPath: `/api/v1/users/${id}`, method: "GET", headers: headers
     })
 }
+
+export async function getUserCanParticipateInElections(id, headers) {
+    return await baseRequest({urlPath: "/api/v1/admin/userCanParticipateIn/" + id,
+    method: "GET", headers: headers})
+}
