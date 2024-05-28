@@ -39,3 +39,15 @@ export async function changePassword(body, headers){
         urlPath: "api/v1/users/changePassword", method: "PATCH", headers: headers, body: body
     })
 }
+
+export async function createElection(body, headers){
+    return await baseRequest({
+        urlPath: "api/v1/admin/createElection", method: "POST", headers: headers, body: body
+    })
+}
+
+export async function getAllUsers(headers){
+    return await baseRequest({
+        urlPath: "api/v1/users", method: "GET", headers: headers
+    })
+}

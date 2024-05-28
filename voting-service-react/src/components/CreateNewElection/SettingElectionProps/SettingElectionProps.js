@@ -2,6 +2,7 @@ import AdminPanel from "../../AdminPanel/AdminPanel"
 import "./SettingElectionProps.css"
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { createElection } from "../../../API/API";
 
 function SettingElectionProps(){
   const navigate = useNavigate()
@@ -13,7 +14,22 @@ function SettingElectionProps(){
     startDate: '',
     endDate: '',
     allowanceToChangeVote: 'yes',
+    maxVotes: 1
   });
+  const [newElectionLocation, setNewElectionLocation] = useState({
+    "country": "",
+    "city": ""
+  })
+  const [newElection, setNewElection] = useState({
+    "title": "",
+    "description": "",
+    "startDate": "",
+    "endDate": "",
+    "canRetractVote": true,
+    "votingStrategy": "",
+    "maxVotes" : 1,
+    "location": ""
+  })
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,14 +38,31 @@ function SettingElectionProps(){
 
   const handleDropdownClick = (type) => {
     setElectionType(type);
+    formData.maxVotes = 1;
     setShowDropdown(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Logic to handle form submission
-    console.log('Election created:', { ...formData, electionType });
+    newElection.canRetractVote = formData.allowanceToChangeVote === 'yes';
+    newElection.title = formData.electionName;
+    newElection.votingStrategy = electionType === 'Єдиний голос' ? 'PluralityVoting': electionType === 'Множинний голос' ? 'ApprovalVoting' : 'DistributionVoting';
+    newElection.maxVotes = formData.maxVotes === 1 ? formData.maxVotes : null;
+    newElection.startDate = `${formData.startDate}T00:00:00`;
+    newElection.endDate = `${formData.endDate}T00:00:00`;
+    newElection.location = newElectionLocation;
+    createElection(newElection, 
+      {"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`})
+    console.log('Election created:', newElection);
   };
+
+  const handleChangeLocation = (e) => {
+    const {name, value} = e.target;
+    setNewElectionLocation((prevLocation) => ({
+      ...prevLocation,
+      [name]: value
+    }))
+  }
 
   useEffect(() => {
     if(sessionStorage.getItem("role") === 'USER'){
@@ -52,16 +85,17 @@ function SettingElectionProps(){
             onChange={handleChange}
           />
         </label>
-        <label>
-          Локація:
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-          />
-        </label>
-        <div className="date-container">
+        <div className="inputs-block">
+          <label>
+            Країна:
+            <input type="text" name="country" value={newElectionLocation.country} onChange={handleChangeLocation}/>
+          </label>
+          <label>
+            Місто:
+            <input type="text" name="city" value={newElectionLocation.city} onChange={handleChangeLocation}/>
+          </label>
+        </div>
+        <div className="inputs-block">
           <label>
             Дата початку:
             <input
@@ -100,18 +134,32 @@ function SettingElectionProps(){
             </div>)}
           </div>
         </label>
-        <label>
-          Дозвіл на зміну голосу:
-          <select
-            name="allowanceToChangeVote"
-            value={formData.allowanceToChangeVote}
-            onChange={handleChange}
-          >
-            <option value="yes">Так</option>
-            <option value="no">Ні</option>
-          </select>
-        </label>
-        <button type="submit" className="continue-button"><Link className="continue-button__label" to={"/add-candidates"}>
+        <div className="inputs-block">
+          <label>
+            Дозвіл на зміну голосу:
+            <select
+              name="allowanceToChangeVote"
+              value={formData.allowanceToChangeVote}
+              onChange={handleChange}
+            >
+              <option value="yes">Так</option>
+              <option value="no">Ні</option>
+            </select>
+          </label>
+          <label>
+              Максимальна кількість голосів:
+              <input
+                type="number"
+                name="maxVotes"
+                min={1}
+                max={100}
+                value={formData.maxVotes}
+                onChange={handleChange}
+                disabled={!(electionType === 'Оцінка')}
+              />
+            </label>
+          </div>
+        <button onClick={handleSubmit} type="submit" className="continue-button"><Link className="continue-button__label" to={"/add-candidates"}>
           Продовжити
         </Link></button>
       </form>
