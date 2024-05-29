@@ -68,6 +68,10 @@ export async function getUserCanParticipateInElections(id, headers) {
     method: "GET", headers: headers})
 }
 
+export async function getAllElections(headers){
+    return await baseRequest({urlPath: "api/v1/election", method: "GET", headers: headers})
+}
+
 export async function getElectionById(id, headers) {
     return await baseRequest({urlPath: `api/v1/election/${id}`,
         method: "GET", headers: headers})
@@ -87,4 +91,3 @@ export async function getUserById(headers, id) {
     return await baseRequest({urlPath: `api/v1/users/${id}`,
         method: "GET", headers: headers})
 }
-

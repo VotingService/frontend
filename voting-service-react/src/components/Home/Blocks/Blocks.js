@@ -6,7 +6,7 @@ export default function Blocks(props){
     let searchValue = props.searchValue ? props.searchValue.searchValue : null;
     let itemList = props.blocks;
     if (itemList) {
-        alert(itemList[0].name)
+        // alert(itemList[0].name)
     }
     let foundItems = searchValue ? itemList.filter(item => item.name.search(searchValue) !== -1) : itemList;
     let sortedItems = [];
