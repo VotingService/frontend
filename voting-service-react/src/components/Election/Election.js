@@ -13,54 +13,7 @@ function Election(props){
   const [isStatisticsShown, seIsStatisticsShown] = useState(false)
   const [electionWinner, setElectionWinner] = useState({})
   const [electionStats, setElectionStats] = useState([])
-  const [election, setElection] = useState({
-    "name": "Вибори президента України",
-    "description": "",
-    "start-time": "12.05.2024",
-    "end-time": "14.05.2024",
-    "candidates": [
-      {
-        "name": "Володимир",
-        "surname": "Зеленський",
-        "by-father": "Олександрович",
-        "image_uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Volodymyr_Zelensky_Official_portrait.jpg/250px-Volodymyr_Zelensky_Official_portrait.jpg",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "votes_percent": 25
-      },
-      {
-        "name": "Володимир",
-        "surname": "Зеленський",
-        "by-father": "Олександрович",
-        "image_uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Volodymyr_Zelensky_Official_portrait.jpg/250px-Volodymyr_Zelensky_Official_portrait.jpg",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "votes_percent": 20
-      },
-      {
-        "name": "Володимир",
-        "surname": "Зеленський",
-        "by-father": "Олександрович",
-        "image_uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Volodymyr_Zelensky_Official_portrait.jpg/250px-Volodymyr_Zelensky_Official_portrait.jpg",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "votes_percent": 20
-      },
-      {
-        "name": "Володимир",
-        "surname": "Зеленський",
-        "by-father": "Олександрович",
-        "image_uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Volodymyr_Zelensky_Official_portrait.jpg/250px-Volodymyr_Zelensky_Official_portrait.jpg",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "votes_percent": 20
-      },
-      {
-        "name": "Володимир",
-        "surname": "Зеленський",
-        "by-father": "Олександрович",
-        "image_uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Volodymyr_Zelensky_Official_portrait.jpg/250px-Volodymyr_Zelensky_Official_portrait.jpg",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "votes_percent": 45
-      }
-    ]
-  })
+  const [election, setElection] = useState({})
 
   useEffect(() => {
     const fetchData1 = getElectionWinner({Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`}, state.electionId);
