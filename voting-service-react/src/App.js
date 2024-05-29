@@ -22,6 +22,7 @@ import CandidateList from "./components/CandidateList/CandidateList";
 import EditCandidates from './components/EditCandidates/EditCandidates';
 import AvailableElections from './components/AvailableElections/AvailableElections';
 import VotingSuccess from './components/VotingSuccess/VotingSuccess';
+import AdminInfo from './components/AdminInfo/AdminInfo';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
                 <Route path="/account" element={<Account/>}/>
                 <Route path="/candidate" element={<Candidate/>}/>
                 <Route path="/candidatelist" element={<CandidateList/>}/>
+                <Route path="/admin-info" element={<AdminInfo/>}/>
             </Routes>
         </Router>
     );

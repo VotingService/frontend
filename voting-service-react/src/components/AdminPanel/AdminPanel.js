@@ -16,7 +16,7 @@ function AdminPanel() {
       <Link to={"/home-admin"} className="section"><FaHome className="section__icon"/><p>Домашня сторінка</p></Link>
       <Link to={"/account"} className="section"><MdAccountCircle className="section__icon"/><p>Особистий кабінет</p></Link>
       <Link className="section"><IoMdSettings className="section__icon"/><p>Налаштування</p></Link>
-      <Link className="section"><FaInfoCircle className="section__icon"/><p>Інформація та контакти</p></Link>
+      <Link to={"/admin-info"} className="section"><FaInfoCircle className="section__icon"/><p>Інформація та контакти</p></Link>
       <button onClick={handleExit} className="exit-button">Вийти</button>
     </div>
   );

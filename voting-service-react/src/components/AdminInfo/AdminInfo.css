@@ -1,0 +1,22 @@
+.admin-info-page{
+  display: flex;
+}
+
+.no-panel{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  color: rgb(0, 11, 91);
+  height: 100vh;
+  width: 1000px;
+}
+
+.title {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.subtitle{
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
