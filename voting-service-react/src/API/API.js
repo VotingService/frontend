@@ -71,3 +71,23 @@ export async function getUserCanParticipateInElections(id, headers) {
 export async function getAllElections(headers){
     return await baseRequest({urlPath: "api/v1/election", method: "GET", headers: headers})
 }
+
+export async function getElectionById(id, headers) {
+    return await baseRequest({urlPath: `api/v1/election/${id}`,
+        method: "GET", headers: headers})
+}
+
+export async function getAllCandidatesByElectionId(id, headers) {
+    return await baseRequest({urlPath: `api/v1/election/candidates/${id}`,
+        method: "GET", headers: headers})
+}
+
+export async function vote(headers, body) {
+    return await baseRequest({urlPath: `api/v1/ballots/vote`,
+        method: "POST", headers: headers, body: body})
+}
+
+export async function getUserById(headers, id) {
+    return await baseRequest({urlPath: `api/v1/users/${id}`,
+        method: "GET", headers: headers})
+}
