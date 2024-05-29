@@ -83,3 +83,8 @@ export async function vote(headers, body) {
         method: "POST", headers: headers, body: body})
 }
 
+export async function getUserById(headers, id) {
+    return await baseRequest({urlPath: `api/v1/users/${id}`,
+        method: "GET", headers: headers})
+}
+

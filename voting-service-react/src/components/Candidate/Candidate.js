@@ -1,10 +1,11 @@
 import "./Candidate.css"
 import Header from "../Header/Header";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
+import {getUserById} from "../../API/API";
 
 export default function Candidate() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     let candidate =
         {
             "name": "Володимир Зеленський Олександрович",
@@ -19,6 +20,15 @@ export default function Candidate() {
             navigate("/")
         }
     })
+    const location = useLocation();
+    const { candidateId } = location.state;
+    const [name, setName] = useState('');
+    useEffect(() => {
+        getUserById({Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`}, candidateId).then(res =>{
+         setName(res.data.lastName + ` ${res.data.firstName} ` + res.data.byFather);
+        }
+        )
+    })
     return (
         <div>
             <Header/>
@@ -27,7 +37,7 @@ export default function Candidate() {
                 <div className="candidate-container">
                     <img alt="winner-icon" src={candidate.image_uri}/>
                     <div className="about-candidate">
-                        <h2>{candidate.name}</h2>
+                        <h2>{name}</h2>
                         <div className="candidate-description">{candidate.description}</div>
                     </div>
                 </div>
