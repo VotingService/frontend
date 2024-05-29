@@ -22,7 +22,8 @@
 }
 
 .election-winner-block img{
-  width: 200px;
+  max-width: 300px;
+  max-height: 300px;
 }
 
 .election-winner-block__info{

@@ -24,3 +24,7 @@
     padding-top: 30px;
     max-width: 500px;
 }
+
+.candidate-container img{
+    max-width: 400px;
+}

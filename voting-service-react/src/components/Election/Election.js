@@ -36,10 +36,10 @@ function Election(props){
   })
 
   rendered_statistics = electionStats.map(candidate => (
-    <div className="candidate-statistics-item">
+    <div key={candidate.id} className="candidate-statistics-item">
       <div className="candidate-statistics-item__info">
         <h5>{candidate.lastName} {candidate.firstName} {candidate.byFather}</h5>
-        <Link state={{id: candidate.id}} to={"/candidate"} className="about-button">Про кандидата</Link>
+        <Link state={{candidate: candidate}} to={"/candidate"} className="about-button">Про кандидата</Link>
       </div>
       <div style={{width: electionBarWidth}} className="candidate-statistics-item__bar">
         <div className="candidate-statistics-item__bar__filled" style={{width: candidate.pointInPercentage / 100 * electionBarWidth}}></div>

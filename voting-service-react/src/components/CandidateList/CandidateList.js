@@ -173,7 +173,7 @@ export default function CandidateList(props) {
                             <div key={candidate.id} className="candidate-item">
                                 <h3>{candidate.name}</h3>
                                 <div className="candidate-item__about-and-input">
-                                    <Link className="about" to={"/candidate"} state={{candidateId: candidate.id}}>
+                                    <Link className="about" to={"/candidate"} state={{candidate: candidate}}>
                                         Про кандидата</Link>
                                     {electionType === ELECTION_TYPE_SINGLE ?
                                         (<input
