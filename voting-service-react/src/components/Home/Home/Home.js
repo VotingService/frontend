@@ -11,20 +11,22 @@ export default function Home(props) {
     useEffect(() => {
         getUserCanParticipateInElections(sessionStorage.getItem("user_id"),
             {Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`}).then(res => {
-            available = res.data._embedded.elections.map((item) => {
-                return ({name: item.title, buttonType: 'vote', startDate: item.startDate})
+                let av1 = res.data._embedded.elections.filter(item => item.startDate < '2024-05-28T22:43:46');
+            available = av1.map((item) => {
+                return ({name: item.title, buttonType: 'vote', startDate: item.startDate, electionId: item.id})
             });
             setRenderedAvailableBlocks(available);
             let soon1 = [];
-            const firstDate = '2024-05-28T22:43:46';
-            soon1 = available.filter(item => item.startDate > '2024-05-28T22:43:46');
+            soon1 = res.data._embedded.elections.filter(item => item.startDate > '2024-05-28T22:43:46').map((item) => {
+                return ({name: item.title, buttonType: 'vote', startDate: item.startDate, electionId: item.id})
+            });
             setRenderedSoonBlocks(soon1);
         }).catch((error) => {
         });
 
     }, []);
     let renderedAvailableBlocks1 = renderedAvailableBlocks.map(item =>
-        <Block name={item.name} buttonType={item.buttonType} endDate={item.endDate}
+        <Block name={item.name} buttonType={item.buttonType} endDate={item.endDate} electionId={item.electionId}
                key={renderedAvailableBlocks.indexOf(item)}></Block>);
     let renderedSoonBlocks1 = renderedSoonBlocks.map(item =>
         <Block name={item.name} buttonType={''} endDate={item.endDate}
