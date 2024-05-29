@@ -91,3 +91,8 @@ export async function getUserById(headers, id) {
     return await baseRequest({urlPath: `api/v1/users/${id}`,
         method: "GET", headers: headers})
 }
+
+export async function getElectionWinner(headers, electionId){
+    return await baseRequest({urlPath: `api/v1/stats/electionWinner/${electionId}`, 
+    method: "GET", headers: headers})
+}

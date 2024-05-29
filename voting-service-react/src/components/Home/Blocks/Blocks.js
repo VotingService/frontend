@@ -40,7 +40,7 @@ export default function Blocks(props){
     }
     let renderedBlocks = sortedItems.map(item =>
         <Block name={item.name} buttonType={item.buttonType} endDate={item.endDate}
-               key={sortedItems.indexOf(item)}></Block>)
+               key={sortedItems.indexOf(item)} electionId={item.id}></Block>)
     return(
         <div className="available-blocks">
             {renderedBlocks}

@@ -15,8 +15,8 @@ export default function AvailableElections() {
     {name: 'Доступне голосування2', buttonType: 'vote'}
 ];
   useEffect(() => {
-    if(sessionStorage.getItem("role") === 'USER'){
-      navigate("/home")
+    if(sessionStorage.getItem("role") === 'ADMIN'){
+      navigate("/home-admin")
     } else if (!sessionStorage.getItem("role")){
       navigate("/")
   }

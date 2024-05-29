@@ -1,19 +1,16 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./Election.css"
 import Header from "../Header/Header";
+import { getElectionWinner } from "../../API/API";
 
-function Election(){
+function Election(props){
+  const location = useLocation();
+  const state = location.state;
   let rendered_statistics = []
   const electionBarWidth = 800
   const [isStatisticsShown, seIsStatisticsShown] = useState(false)
-  const [electionWinner, setElectionWinner] = useState({
-    "name": "Володимир",
-    "surname": "Зеленський",
-    "by-father": "Олександрович",
-    "image_uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Volodymyr_Zelensky_Official_portrait.jpg/250px-Volodymyr_Zelensky_Official_portrait.jpg",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-  })
+  const [electionWinner, setElectionWinner] = useState({})
   const [election, setElection] = useState({
     "name": "Вибори президента України",
     "description": "",
@@ -63,6 +60,16 @@ function Election(){
     ]
   })
 
+  useEffect(() => {
+    getElectionWinner({Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`}, state.electionId)
+    .then((res) => {
+      setElectionWinner(res.data._embedded.users[0])
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  })
+
   rendered_statistics = election.candidates.map(candidate => (
     <div className="candidate-statistics-item">
       <div className="candidate-statistics-item__info">
@@ -83,9 +90,9 @@ function Election(){
           <h4>{election["start-time"]} - {election["end-time"]}</h4>
           <h2>Переможець:</h2>
           <div className="election-winner-block">
-            <img alt="winner-icon" src={electionWinner.image_uri}/>
+            <img alt="winner-icon" src={electionWinner.photoUrl}/>
             <div className="election-winner-block__info">
-              <h2>{electionWinner.name} {electionWinner["by-father"]} {electionWinner.surname}</h2>
+              <h2>{electionWinner.lastName} {electionWinner.firstName} {electionWinner.byFather}</h2>
               <p>{electionWinner.description}</p>
             </div>
           </div>
