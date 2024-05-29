@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AdminPanel from '../AdminPanel/AdminPanel';
 import './EditCandidates.css';
+import { getAllUsers } from '../../API/API';
 
 const userList = [
   { id: 1, name: 'Степан Гіга Тарасович', role: 'користувач' },
@@ -13,6 +14,7 @@ const userList = [
 
 function EditCandidates() {
   const navigate = useNavigate()
+  const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [chosenUsers, setChosenUsers] = useState([]);
@@ -22,8 +24,8 @@ function EditCandidates() {
     setSearchTerm(value);
 
     if (value) {
-      const filtered = userList.filter((user) =>
-        user.name.toLowerCase().startsWith(value.toLowerCase())
+      const filtered = users.filter((user) =>
+        (user.firstName + " " + user.lastName).toLowerCase().includes(value.toLowerCase())
       );
       setFilteredUsers(filtered);
     } else {
@@ -42,20 +44,29 @@ function EditCandidates() {
 
   const handleChangeRole = (id) => {
     const updatedChosen = chosenUsers.map((user) =>
-      user.id === id ? { ...user, role: user.role === 'користувач' ? 'кандидат' : 'користувач' } : user
+      user.id === id ? { ...user, demoRole: user.demoRole === 'користувач' ? 'кандидат' : 'користувач' } : user
     );
     setChosenUsers(updatedChosen);
   };
 
   const handleSave = () => {
-    console.log('1234')
     console.log('Users with updated roles:', chosenUsers);
   };
 
   useEffect(() => {
     if(sessionStorage.getItem("role") === 'USER'){
         navigate("/home")
+        return;
     }
+    getAllUsers({"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`})
+    .then((res) => {
+      setUsers(res.data._embedded.users.map(obj => ({
+        ...obj, 
+        demoRole: 'користувач'
+      })))})
+    .catch((err) => {
+      console.log(err)
+    })
 })
 
   return (
@@ -78,7 +89,7 @@ function EditCandidates() {
                 className="autocomplete-item"
                 onClick={() => handleUserClick(user)}
               >
-                {user.name} - {user.role}
+                {user.lastName} {user.firstName} {user.byFather} - {user.demoRole}
               </div>
             ))}
           </div>
@@ -87,7 +98,7 @@ function EditCandidates() {
       <div className="chosen-users">
         {chosenUsers.map((user) => (
           <div key={user.id} className="user-item">
-            {user.name} - {user.role}
+            {user.lastName} {user.firstName} {user.byFather} - {user.demoRole}
             <button
               className="change-role-button"
               onClick={() => handleChangeRole(user.id)}
