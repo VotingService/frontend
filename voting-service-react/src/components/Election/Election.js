@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import "./Election.css"
 import Header from "../Header/Header";
-import { getElectionWinner, getElectionById } from "../../API/API";
+import { getElectionWinner, getElectionById, getElectionStats } from "../../API/API";
 import AdminPanel from "../AdminPanel/AdminPanel";
 
 function Election(props){
@@ -12,6 +12,7 @@ function Election(props){
   const electionBarWidth = 800
   const [isStatisticsShown, seIsStatisticsShown] = useState(false)
   const [electionWinner, setElectionWinner] = useState({})
+  const [electionStats, setElectionStats] = useState([])
   const [election, setElection] = useState({
     "name": "Вибори президента України",
     "description": "",
@@ -64,33 +65,35 @@ function Election(props){
   useEffect(() => {
     const fetchData1 = getElectionWinner({Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`}, state.electionId);
     const fetchData2 = getElectionById({Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`}, state.electionId);
+    const fetchData3 = getElectionStats({Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`}, state.electionId);
 
-    Promise.all([fetchData1, fetchData2])
-    .then(([res1, res2]) => {
+    Promise.all([fetchData1, fetchData2, fetchData3])
+    .then(([res1, res2, res3]) => {
       setElectionWinner(res1.data._embedded.users[0])
       setElection({
         ...res2.data,
         startDate: res2.data.startDate.split('T')[0].replaceAll('-', '.'),
         endDate: res2.data.endDate.split('T')[0].replaceAll('-', '.'),
       })
+      setElectionStats(res3.data)
     })
     .catch((err) => {
       console.log(err)
     })
   })
 
-  // rendered_statistics = election.candidates.map(candidate => (
-  //   <div className="candidate-statistics-item">
-  //     <div className="candidate-statistics-item__info">
-  //       <h5>{candidate.name} {candidate["by-father"]} {candidate.surname}</h5>
-  //       <Link to={"/candidate"} className="about-button">Про кандидата</Link>
-  //     </div>
-  //     <div style={{width: electionBarWidth}} className="candidate-statistics-item__bar">
-  //       <div className="candidate-statistics-item__bar__filled" style={{width: candidate.votes_percent / 100 * electionBarWidth}}></div>
-  //       <p className="candidate-statistics-item__bar__percentage">{candidate.votes_percent} %</p>
-  //     </div>
-  //   </div>
-  // ))
+  rendered_statistics = electionStats.map(candidate => (
+    <div className="candidate-statistics-item">
+      <div className="candidate-statistics-item__info">
+        <h5>{candidate.lastName} {candidate.firstName} {candidate.byFather}</h5>
+        <Link state={{id: candidate.id}} to={"/candidate"} className="about-button">Про кандидата</Link>
+      </div>
+      <div style={{width: electionBarWidth}} className="candidate-statistics-item__bar">
+        <div className="candidate-statistics-item__bar__filled" style={{width: candidate.pointInPercentage / 100 * electionBarWidth}}></div>
+        <p className="candidate-statistics-item__bar__percentage">{Math.round(candidate.pointInPercentage)} %</p>
+      </div>
+    </div>
+  ))
   return(
       <div style={sessionStorage.getItem("role") === 'ADMIN' && {display: "flex"}}>
         <Header/>
