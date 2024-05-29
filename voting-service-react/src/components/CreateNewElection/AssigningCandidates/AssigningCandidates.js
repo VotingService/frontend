@@ -8,8 +8,8 @@ function calculateAge(birthDate){
   var today = new Date();
   var currentBirthDate = new Date(birthDate);
   var age_now = today.getFullYear() - currentBirthDate.getFullYear();
-  var m = today.getMonth() - birthDate.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+  var m = today.getMonth() - currentBirthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < currentBirthDate.getDate())) 
     {
       age_now--;
     }

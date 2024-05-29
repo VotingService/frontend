@@ -16,7 +16,7 @@ export default function CandidateList(props) {
     const {electionId} = location.state;
     const [election, setElection] = useState({});
     useEffect(() => {
-        getElectionById(electionId, {Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`}).then(res => {
+        getElectionById({Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`}, electionId).then(res => {
                 setElection(res.data);
                 switch (res.data.votingStrategy) {
                     case 'PluralityVoting':
@@ -163,8 +163,8 @@ export default function CandidateList(props) {
                     <h2 className="remaining-points">Залишилось голосів: <br/> {remainingPoints}</h2>) : null}
                 <div className="vote-for-candidate-page">
                     <h1 className="header">Голосування</h1>
-                    <h4>Щоб віддати голос,
-                        {electionType === ELECTION_TYPE_POINTS ? " впишіть кількість голосів у квадратик " : electionType === ELECTION_TYPE_SINGLE ? "натисніть на кружечок" : "квадратик"} навпроти
+                    <h4>Щоб віддати голос, 
+                        {electionType === ELECTION_TYPE_POINTS ? " впишіть кількість голосів у квадратик " : electionType === ELECTION_TYPE_SINGLE ? " натисніть на кружечок" : " натисніть на квадратик"} навпроти
                         імені вибраного кандидата
                     </h4>
 
