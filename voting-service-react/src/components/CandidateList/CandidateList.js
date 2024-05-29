@@ -51,13 +51,6 @@ export default function CandidateList(props) {
     const navigate = useNavigate()
     const [candidates, setCandidates] = useState([]);
 
-    // let candidates = [{id: 1, name: 'Зеленський Володимир Олександрович'},
-    //     {id: 2, name: 'Зеленський Володимир Олександрович'},
-    //     {id: 3, name: 'Зеленський Олександрович'},
-    //     {id: 4, name: 'Зеленський Володимир Олександрович'},
-    //     {id: 5, name: 'Зеленський Володимир Олександрович'},
-    //     {id: 6, name: 'Зеленський Володимир Олександрович'}
-    // ];
     const [selectedCandidates, setSelectedCandidates] = useState([]);
     const [pointsDistributionJson, setPointsDistributionJson] = useState([]);
     const [pointsDistribution, setPointsDistribution] = useState(
