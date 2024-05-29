@@ -100,3 +100,8 @@ export async function getElectionWinner(headers, electionId){
 export async function getElectionStats(headers, electionId){
     return await baseRequest({urlPath: `api/v1/election/candidates/${electionId}`, method: "GET", headers: headers})
 }
+
+export async function getElectionsByUserId(headers, userId){
+    return await baseRequest({urlPath: `api/v1/ballots/elections/${userId}`,
+        method: "GET", headers: headers})
+}

@@ -2,21 +2,23 @@ import "./History.css"
 import Blocks from "../Home/Blocks/Blocks";
 import Header from "../Header/Header";
 import { useEffect, useState } from "react";
-import { getAllBallotsByUser } from "../../API/API";
+import { getElectionsByUserId } from "../../API/API";
 
 export default function History() {
     const [ballots, setBallots] = useState([])
-    let history = [
-        {name: 'Вибори президента України', buttonType: 'history', endDate: '01/01/2022'},
-        {name: 'Історія голосування2', buttonType: 'history', endDate: '02/02/2023'},
-        {name: 'Історія голосування2', buttonType: 'history', endDate: '03/03/2024'}
-    ];
+    const [history, setHistory] = useState([])
     useEffect(() => {
-        getAllBallotsByUser({"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`},
+        getElectionsByUserId({"Authorization": `Bearer ${sessionStorage.getItem("auth_token")}`},
         sessionStorage.getItem("user_id"))
         .then((res) => {
-            setBallots(res.data._embedded.ballots)
-            console.log(res.data._embedded.ballots)
+            setHistory(res.data._embedded.elections
+                .map(obj => ({
+                    ...obj,
+                    startDate: obj.startDate.split('T')[0],
+                    endDate: obj.endDate.split('T')[0],
+                    name: obj.title,
+                    buttonType: 'history'
+                })))
         })
         .catch((err) => {
             console.log(err)
