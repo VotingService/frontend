@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./Election.css"
 import Header from "../Header/Header";
 import { getElectionWinner, getElectionById } from "../../API/API";
+import AdminPanel from "../AdminPanel/AdminPanel";
 
 function Election(props){
   const location = useLocation();
@@ -67,7 +68,11 @@ function Election(props){
     Promise.all([fetchData1, fetchData2])
     .then(([res1, res2]) => {
       setElectionWinner(res1.data._embedded.users[0])
-      setElection(res2.data)
+      setElection({
+        ...res2.data,
+        startDate: res2.data.startDate.split('T')[0].replaceAll('-', '.'),
+        endDate: res2.data.endDate.split('T')[0].replaceAll('-', '.'),
+      })
     })
     .catch((err) => {
       console.log(err)
@@ -87,11 +92,12 @@ function Election(props){
   //   </div>
   // ))
   return(
-      <div>
+      <div style={sessionStorage.getItem("role") === 'ADMIN' && {display: "flex"}}>
         <Header/>
-        {election && <div className="election-page">
+        {sessionStorage.getItem("role") === 'ADMIN' && <AdminPanel/>}
+        {election && <div className="election-page" style={sessionStorage.getItem("role") === 'ADMIN' && {marginTop: '0px'}}>
           <h1 className="election-name">{election.title}</h1>
-          <h4>{election.startDate.split('T')[0].replaceAll('-', '.')} - {election.endDate.split('T')[0].replaceAll('-', '.')}</h4>
+          <h4>{election.startDate} - {election.endDate}</h4>
           <h2>Переможець:</h2>
           <div className="election-winner-block">
             <img alt="winner-icon" src={electionWinner.photoUrl}/>
