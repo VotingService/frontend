@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Election.css"
 import Header from "../Header/Header";
-import { getElectionWinner } from "../../API/API";
+import { getElectionWinner, getElectionById } from "../../API/API";
 
 function Election(props){
   const location = useLocation();
@@ -61,33 +61,37 @@ function Election(props){
   })
 
   useEffect(() => {
-    getElectionWinner({Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`}, state.electionId)
-    .then((res) => {
-      setElectionWinner(res.data._embedded.users[0])
+    const fetchData1 = getElectionWinner({Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`}, state.electionId);
+    const fetchData2 = getElectionById({Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`}, state.electionId);
+
+    Promise.all([fetchData1, fetchData2])
+    .then(([res1, res2]) => {
+      setElectionWinner(res1.data._embedded.users[0])
+      setElection(res2.data)
     })
     .catch((err) => {
       console.log(err)
     })
   })
 
-  rendered_statistics = election.candidates.map(candidate => (
-    <div className="candidate-statistics-item">
-      <div className="candidate-statistics-item__info">
-        <h5>{candidate.name} {candidate["by-father"]} {candidate.surname}</h5>
-        <Link to={"/candidate"} className="about-button">Про кандидата</Link>
-      </div>
-      <div style={{width: electionBarWidth}} className="candidate-statistics-item__bar">
-        <div className="candidate-statistics-item__bar__filled" style={{width: candidate.votes_percent / 100 * electionBarWidth}}></div>
-        <p className="candidate-statistics-item__bar__percentage">{candidate.votes_percent} %</p>
-      </div>
-    </div>
-  ))
+  // rendered_statistics = election.candidates.map(candidate => (
+  //   <div className="candidate-statistics-item">
+  //     <div className="candidate-statistics-item__info">
+  //       <h5>{candidate.name} {candidate["by-father"]} {candidate.surname}</h5>
+  //       <Link to={"/candidate"} className="about-button">Про кандидата</Link>
+  //     </div>
+  //     <div style={{width: electionBarWidth}} className="candidate-statistics-item__bar">
+  //       <div className="candidate-statistics-item__bar__filled" style={{width: candidate.votes_percent / 100 * electionBarWidth}}></div>
+  //       <p className="candidate-statistics-item__bar__percentage">{candidate.votes_percent} %</p>
+  //     </div>
+  //   </div>
+  // ))
   return(
       <div>
         <Header/>
-        <div className="election-page">
-          <h1 className="election-name">{election.name}</h1>
-          <h4>{election["start-time"]} - {election["end-time"]}</h4>
+        {election && <div className="election-page">
+          <h1 className="election-name">{election.title}</h1>
+          <h4>{election.startDate.split('T')[0].replaceAll('-', '.')} - {election.endDate.split('T')[0].replaceAll('-', '.')}</h4>
           <h2>Переможець:</h2>
           <div className="election-winner-block">
             <img alt="winner-icon" src={electionWinner.photoUrl}/>
@@ -100,7 +104,7 @@ function Election(props){
                   onClick={() => seIsStatisticsShown(!isStatisticsShown)}>{isStatisticsShown ? "Сховати" : "Відобразити"} результати
           </button>
           {isStatisticsShown ? <div className="statistics-block"> {rendered_statistics} </div> : null}
-        </div>
+        </div>}
       </div>
   )
 }

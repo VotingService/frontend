@@ -72,7 +72,7 @@ export async function getAllElections(headers){
     return await baseRequest({urlPath: "api/v1/election", method: "GET", headers: headers})
 }
 
-export async function getElectionById(id, headers) {
+export async function getElectionById(headers, id) {
     return await baseRequest({urlPath: `api/v1/election/${id}`,
         method: "GET", headers: headers})
 }
